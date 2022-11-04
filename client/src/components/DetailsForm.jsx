@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { BranchData } from "./Constants/BranchData";
-import { startRollNumber, studentYear } from "./Constants";
+import { BranchData } from "./constants/BranchData";
+import { clubs, startRollNumber, studentYear } from "./constants";
+import axios from "axios";
+import { Button, Row, Col } from "react-bootstrap";
+import "./DetailsForm.css";
 
 export default function DetailsForm() {
   const { department } = useParams();
 
   const [formValues, setFormValues] = useState({
-    image: null,
+    department,
   });
 
   const renderRollNumbers = () => {
@@ -19,7 +22,18 @@ export default function DetailsForm() {
     rollNumbers.concat(BranchData[department].additionalRollNumbers);
 
     return rollNumbers.map((rollNumber) => {
-      return <option value={`${rollNumber}`}>{`${rollNumber}`}</option>;
+      return (
+        <option
+          key={rollNumber}
+          value={`${rollNumber}`}
+        >{`${rollNumber}`}</option>
+      );
+    });
+  };
+
+  const renderClubOptions = () => {
+    return clubs.map((club) => {
+      return <option key={club} value={`${club}`}>{`${club}`}</option>;
     });
   };
 
@@ -47,10 +61,82 @@ export default function DetailsForm() {
     reader.readAsDataURL(file);
   };
 
+  const handleClubAddition = (e) => {
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      clubs: prevFormValues.clubs
+        ? [...prevFormValues.clubs, clubs[0]]
+        : [clubs[0]],
+    }));
+  };
+
+  const handleClubDeletion = (e, index) => {
+    console.log(index);
+
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      clubs: prevFormValues.clubs.filter(
+        (element, innerIndex) => innerIndex !== index
+      ),
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log(formValues, `${process.env.REACT_APP_BACKEND_URL}/submit`);
+    axios.post(`${process.env.REACT_APP_BACKEND_URL}/submit`, formValues);
+  };
+
+  const onChangeClubValue = (e, index) => {
+    setFormValues((prevFormValues) => ({
+      ...prevFormValues,
+      clubs: prevFormValues.clubs.map((element, innerIndex) => {
+        if (innerIndex === index) {
+          return e.target.value;
+        }
+        return element;
+      }),
+    }));
+  };
+  const renderClubs = (e) => {
+    console.log(formValues.clubs);
+
+    return (
+      <div className="d-grid">
+        {formValues.clubs
+          ? formValues.clubs.map((element, index) => {
+              return (
+                <Row>
+                  <Col xs={10}>
+                    <select
+                      className="input100 club-options-render"
+                      value={element}
+                      onChange={(e) => onChangeClubValue(e, index)}
+                    >
+                      {renderClubOptions()}
+                    </select>
+                  </Col>
+                  <Col>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      aria-label="Close"
+                      onClick={(e) => handleClubDeletion(e, index)}
+                    ></button>
+                  </Col>
+                </Row>
+              );
+            })
+          : null}
+      </div>
+    );
+  };
+
   console.log(formValues);
 
   return (
-    <>
+    <div className="DetailsForm">
       <div style={{ color: "#808080", fontSize: "13px", marginTop: "5px" }}>
         <center>
           For more information, contact Shubham (
@@ -60,8 +146,8 @@ export default function DetailsForm() {
       </div>
       <form
         className="contact100-form validate-form"
-        name="regform"
         id="student-form"
+        onSubmit={handleSubmit}
       >
         <div
           className="wrap-input100 validate-input"
@@ -79,6 +165,8 @@ export default function DetailsForm() {
             name="name"
             id="name"
             placeholder="Enter full name"
+            value={formValues.name}
+            onChange={handleChange}
           />
           <span className="focus-input100"></span>
         </div>
@@ -90,8 +178,8 @@ export default function DetailsForm() {
             type="text"
             name="department"
             id="department"
-            value={department}
-            readonly
+            value={formValues.department}
+            readOnly
           />
           <span className="focus-input100"></span>
         </div>
@@ -101,7 +189,13 @@ export default function DetailsForm() {
             Roll No.
             <h5 style={{ color: "red" }}>*</h5>
           </span>
-          <select className="input100" name="roll_no" id="roll_no">
+
+          <select
+            className="input100"
+            name="rollNumber"
+            value={formValues.rollNumber}
+            onChange={handleChange}
+          >
             {renderRollNumbers()}
           </select>
           <span className="focus-input100"></span>
@@ -119,7 +213,9 @@ export default function DetailsForm() {
             className="input100"
             type="email"
             id="email"
-            name="email_id"
+            name="email"
+            value={formValues.email}
+            onChange={handleChange}
             placeholder="Enter email addess"
           />
           <span className="focus-input100"></span>
@@ -137,7 +233,8 @@ export default function DetailsForm() {
             className="input100"
             type="number"
             name="phone"
-            id="phone"
+            value={formValues.phone}
+            onChange={handleChange}
             placeholder="Enter phone number"
           />
           <span className="focus-input100"></span>
@@ -145,13 +242,19 @@ export default function DetailsForm() {
 
         <div className="wrap-input100">
           <span className="label-input100">Club(s):</span>
-          <input
-            className="input100"
-            type="text"
-            name="clubs"
-            id="clubs"
-            placeholder="Name(s) of clubs(if any)"
-          />
+
+          {renderClubs()}
+
+          <div class="d-grid gap-2">
+            <button
+              class="btn btn-success add-button"
+              type="button"
+              onClick={handleClubAddition}
+            >
+              Add Club(s)(if any)
+            </button>
+          </div>
+
           <span className="focus-input100"></span>
         </div>
 
@@ -184,28 +287,27 @@ export default function DetailsForm() {
             id="wing"
             className="input100"
             placeholder="Name of your wing(if any)"
+            value={formValues.wing}
+            onChange={handleChange}
           />
           <span className="focus-input100"></span>
         </div>
 
         <div className="wrap-input100">
-          <span className="label-input100">
-            Quote:
-            <p className="text-right" id="count">
-              80
-            </p>
-          </span>
+          <span className="label-input100">Quote:</span>
           <input
             className="input100"
             type="text"
             name="quote"
             id="quote"
-            placeholder="Enter a Quote"
+            placeholder="Enter a Quote (Max 80 characters)"
+            maxLength="80"
+            value={formValues.quote}
+            onChange={handleChange}
           />
           <span className="focus-input100"></span>
         </div>
-
-        <div className="container-contact100-form-btn">
+        <div className="container-contact100-form-btn d-grid gap-2">
           <button
             className="submit-button btn-block btn btn-success btn-lg"
             style={{ backgroundColor: "#57b846" }}
@@ -221,6 +323,6 @@ export default function DetailsForm() {
         </div>
       </form>
       <div id="dropDownSelect1"></div>
-    </>
+    </div>
   );
 }
