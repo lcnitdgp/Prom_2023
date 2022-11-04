@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Yearbook 2022</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/vendor/bootstrap/css/bootstrap.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/fonts/Linearicons-Free-v1.0.0/icon-font.min.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css" />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/vendor/css-hamburgers/hamburgers.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/vendor/animsition/css/animsition.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/vendor/select2/select2.min.css"
+    />
+    <!--===============================================================================================-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/vendor/daterangepicker/daterangepicker.css"
+    />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/css/util.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <!--===============================================================================================-->
+  </head>
+  <body>
+    <div class="container-contact100">
+      <div
+        class="contact100-map"
+        id="google_map"
+        data-map-x="40.722047"
+        data-map-y="-73.986422"
+        data-pin="images/icons/map-marker.png"
+        data-scrollwhell="0"
+        data-draggable="1"
+      ></div>
+
+      <div class="wrap-contact100">
+        <div
+          class="contact100-form-title"
+          style="background-image: url(/images/bg-01.jpg)"
+        >
+          <span class="contact100-form-title-1"> Yearbook 2022 </span>
+
+          <span class="contact100-form-title-2"> Literary Circle </span>
+        </div>
+        <div style="color: #808080; font-size: 13px; margin-top: 5px">
+          <center>
+            For more information, contact Shubham (<a href="tel:9038055767"
+              >9038055767</a
+            >) or Mohit (<a href="tel:9830372570">9830372570</a>).
+          </center>
+        </div>
+        <form
+          class="contact100-form validate-form"
+          name="regform"
+          id="student-form"
+        >
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Name is required"
+          >
+            <span class="label-input100">
+              <span
+                >Full Name:
+                <h5 style="color: red">*</h5>
+              </span>
+            </span>
+            <input
+              class="input100"
+              type="text"
+              name="name"
+              id="name"
+              placeholder="Enter full name"
+            />
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="wrap-input100">
+            <span class="label-input100">Department</span>
+            <input
+              class="input100"
+              type="text"
+              name="department"
+              id="department"
+              value="<%= dept %>"
+              readonly
+            />
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="wrap-input100" id="roll">
+            <span class="label-input100"
+              >Roll No.
+              <h5 style="color: red">*</h5></span
+            >
+            <select class="input100" name="roll_no" id="roll_no">
+              <% if(dept2==="CE"){ %>
+              <option value="17CE8026">17CE8026</option>
+              <%}%> <% if(dept2==="CS"){ %>
+              <option value="17CS8003">17CS8003</option>
+              <%}%> <% if(dept2==="MM"){ %>
+              <option value="17MM8021">17MM8021</option>
+              <%}%> <% for(var i=8001;i<=num;i++) {%>
+              <option value="18<%= dept2 %><%= i %>">
+                18<%= dept2 %><%= i %>
+              </option>
+
+              <%}%> <% for(var i=0;i<additionalRollNos.length;i++) {%>
+
+              <option value="<%= additionalRollNos[i] %>">
+                <%= additionalRollNos[i] %>
+              </option>
+              <%}%>
+            </select>
+            <span class="focus-input100"></span>
+          </div>
+
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Valid email is required: ex@abc.xyz"
+          >
+            <span class="label-input100"
+              >Email:
+              <h5 style="color: red">*</h5></span
+            >
+            <input
+              class="input100"
+              type="email"
+              id="email"
+              name="email_id"
+              placeholder="Enter email addess"
+            />
+            <span class="focus-input100"></span>
+          </div>
+
+          <div
+            class="wrap-input100 validate-input"
+            data-validate="Phone is required"
+          >
+            <span class="label-input100"
+              >Phone:
+              <h5 style="color: red">*</h5></span
+            >
+            <input
+              class="input100"
+              type="number"
+              name="phone"
+              id="phone"
+              placeholder="Enter phone number"
+            />
+            <span class="focus-input100"></span>
+          </div>
+
+          <!-- <div class="wrap-input100 validate-input" data-validate="Favourite spot is required">
+					<span class="label-input100" style="margin-top: -10px;">Favourite Spot in College:<h5 style="color:red;">*</h5></span>
+					<input type="text" name="spot" id="spot" placeholder="Enter Your Favourite Spot in College">
+					<span class="focus-input100"></span>
+				</div> -->
+
+          <div class="wrap-input100">
+            <span class="label-input100">Club(s):</span>
+            <input
+              class="input100"
+              type="text"
+              name="clubs"
+              id="clubs"
+              placeholder="Name(s) of clubs(if any)"
+            />
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="wrap-input100 validate-input photo-wrapper">
+            <span class="label-input100"
+              >Photo
+              <h5 style="color: red">*</h5></span
+            >
+            <input
+              type="file"
+              name="photo"
+              id="photo"
+              accept="image/*"
+              style="width: 100%"
+            />
+            <img id="photo-display" />
+
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="wrap-input100">
+            <span class="label-input100">Wing:</span>
+            <input
+              type="text"
+              name="wing"
+              id="wing"
+              class="input100"
+              placeholder="Name of your wing(if any)"
+            />
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="wrap-input100">
+            <span class="label-input100"
+              >Quote:
+              <p class="text-right" id="count">80</p>
+            </span>
+            <input
+              class="input100"
+              type="text"
+              name="quote"
+              id="quote"
+              placeholder="Enter a Quote(80 characters)"
+              onkeyup="chcount()"
+            />
+            <span class="focus-input100"></span>
+          </div>
+
+          <div class="container-contact100-form-btn">
+            <button
+              class="submit-button btn-block btn btn-success btn-lg"
+              style="background-color: #57b846"
+            >
+              <span>
+                Submit
+                <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div id="dropDownSelect1"></div>
+
+    <script type="text/javascript">
+      function chcount() {
+        var quote = document.getElementById("quote").value;
+        var z = quote.length;
+        var k = document.getElementById("count");
+        var y = 80 - z;
+        k.innerText = y;
+      }
+
+      function validate(event) {
+        event.preventDefault();
+
+        // console.log(button.innerHTML);
+        
+        var quote = document.getElementById("quote").value;
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var photo = document.getElementById("photo-display").src;
+        var roll_no = document.getElementById("roll_no").value;
+        var department = document.getElementById("department").value;
+        var clubs = document.getElementById("clubs").value;
+        var wing = document.getElementById("wing").value;
+        var phone = document.getElementById("phone").value;
+        const files = document.querySelector("[type=file]").files;
+
+        var patt = /^[0-9]+$/;
+
+        var z = quote.length;
+
+        if (name.length > 100) {
+          alert("Name length must be less than or equal to 100 characters.");
+          return false;
+        } else if (name.length == 0) {
+          alert("Name field can't be empty.");
+          return false;
+        } else if (email.length > 100) {
+          alert(
+            "Email ID length must be less than or equal to 100 characters."
+          );
+          return false;
+        } else if (email.length == 0) {
+          alert("Email ID can't be empty.");
+          return false;
+        } else if (!phone.match(patt)) {
+          alert("Enter a valid phone number.");
+          return false;
+        } else if (phone.length != 10) {
+          alert("Phone number must have 10 digits.");
+          return false;
+        } else if (clubs.length > 500) {
+          alert(
+            "Total length of clubs' name must be less than or equal to 500 characters."
+          );
+          return false;
+        } else if (wing.length > 100) {
+          alert(
+            "Length of the wings length must be less than or equal to 100 characters."
+          );
+          return false;
+        }
+        if (z > 80) {
+          alert(
+            "Quote's length should be less than or equal to 80 characters."
+          );
+          return false;
+        } else if(!files.length){
+          alert("Image field can't be empty");
+          return false;
+        } else if(files[0].size > 10485760){
+          alert("Image size has to be less than 10mb");
+          return false;
+        }
+
+        const body = {
+          name,
+          department,
+          roll_no,
+          email,
+          phone,
+          clubs,
+          photo,
+          wing,
+          quote,
+        };
+
+        console.log(body);
+
+        const button = document.querySelector(".submit-button");
+        button.innerHTML = "Loading.....";
+        button.disabled = true;
+
+
+        fetch("/submit", {
+          method: "POST",
+          body: JSON.stringify(body),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        })
+          .then((response) => response.json())
+          .then((responseData) => {
+            console.log(responseData);
+            if (responseData.error) {
+              window.location.assign("<%= process.env.WEBSITE_URL%>/error");
+            } else {
+              window.location.assign("<%= process.env.WEBSITE_URL%>/thankyou");
+            }
+            return responseData;
+          });
+      }
+
+      document
+        .getElementById("student-form")
+        .addEventListener("submit", validate);
+    </script>
+
+    <script>
+      
+
+      document.getElementById("photo").addEventListener("change", function (e) {
+        var files = e.currentTarget.files;
+        if (files && files[0]) {
+
+          var FR = new FileReader();
+
+          FR.onload = function (e) {
+            document.getElementById("photo-display").src = e.target.result;
+          };
+
+          FR.readAsDataURL(files[0]);
+        }
+      });
+    </script>
+
+    <!--===============================================================================================-->
+    <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/bootstrap/js/popper.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKFWBqlKAGCeS1rMVoaNlwyayu0e0YRes"></script>
+	<script src="/js/map-custom.js"></script> -->
+    <!--===============================================================================================-->
+    <script src="/js/main.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "UA-23581568-13");
+    </script>
+  </body>
+</html>
