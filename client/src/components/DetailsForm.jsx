@@ -27,7 +27,7 @@ const quoteErrorMessage = "Quote can only be 80 characters long";
 const duplicateErrorMessage = "Duplicate club entries found !";
 const requestTimeOutErrorMessage =
   "Request Timed out! Please check your internet connection or please contact us if the issue persists.";
-const imageSizeErrorMessage = "Image size cannot be greater than 5mb";
+const imageSizeErrorMessage = "Image size cannot be greater than 5MB";
 
 yup.addMethod(yup.array, "distinctEntries", function (errorMessage) {
   return this.test(`test-distinct-entries`, errorMessage, function (value) {
@@ -40,16 +40,20 @@ yup.addMethod(yup.array, "distinctEntries", function (errorMessage) {
   });
 });
 
-yup.addMethod(yup.mixed, "maxImageSize", function (errorMessage) {
+yup.addMethod(yup.string, "maxImageSize", function (errorMessage) {
   return this.test(`test-max-image-size`, errorMessage, function (value) {
     const { path, createError } = this;
 
-    // console.log(value);
     console.log(value);
-    console.log(atob(value.substring(value.indexOf(",") + 1)).length);
+
+    let finalLength = value
+      ? atob(value.substring(value.indexOf(",") + 1)).length
+      : 0;
+
+    console.log(finalLength / (1024 * 1024));
 
     return (
-      atob(value.substring(value.indexOf(",") + 1)).length <= 5 * 1024 * 1024 ||
+      finalLength <= 5 * 1024 * 1024 ||
       createError({ path, message: errorMessage })
     );
   });
@@ -66,7 +70,10 @@ const validationSchema = yup.object().shape({
     .matches(phoneRegExp, phoneErrorMessage)
     .min(10, phoneLengthErrorMessage)
     .max(10, phoneLengthErrorMessage),
-  image: yup.string().required(requiredErrorMessage),
+  image: yup
+    .string()
+    .required(requiredErrorMessage)
+    .maxImageSize(imageSizeErrorMessage),
   clubs: yup.array().distinctEntries(duplicateErrorMessage),
   quote: yup.string().max(80, quoteErrorMessage),
   wing: yup.string(),
@@ -380,6 +387,7 @@ export default function DetailsForm() {
                         onChange={(e) => {
                           handleFileUpload(e, values, setValues);
                         }}
+                        {...field}
                       />
 
                       {values.image ? (
