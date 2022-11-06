@@ -22,6 +22,18 @@ mongoose.connect(MONGO_URL, {
 app.use(bodyParser.json({ limit: "50mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 
+app.get("*", function (req, res) {
+  const protocol = req.protocol;
+  const host = req.hostname;
+  const url = req.originalUrl;
+  const port = process.env.PORT || PORT;
+
+  const fullUrl = `${protocol}://${host}:${port}${url}`;
+
+  const responseString = `Full URL is: ${fullUrl}`;
+  res.send(responseString);
+});
+
 //form upload
 app.post("/submit", async function (req, res) {
   console.log("The value is:", req.body);
@@ -78,6 +90,6 @@ app.post("/check/:rollNumber", async function (req, res) {
 app.listen(PORT, function (err) {
   if (err) throw err;
   else {
-    console.log(`Server is running on PORT: ${PORT}`);
+    console.log(`Server is running on : ${PORT};`);
   }
 });

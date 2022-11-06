@@ -44,16 +44,12 @@ yup.addMethod(yup.string, "maxImageSize", function (errorMessage) {
   return this.test(`test-max-image-size`, errorMessage, function (value) {
     const { path, createError } = this;
 
-    console.log(value);
-
-    let finalLength = value
-      ? atob(value.substring(value.indexOf(",") + 1)).length
-      : 0;
+    let finalLength = value ? value.length : 0;
 
     console.log(finalLength / (1024 * 1024));
 
     return (
-      finalLength <= 5 * 1024 * 1024 ||
+      finalLength <= 7 * 1024 * 1024 ||
       createError({ path, message: errorMessage })
     );
   });
@@ -220,6 +216,7 @@ export default function DetailsForm() {
       const imageUrl = await uploadImage(values.image);
       setUploadingImage(0);
 
+      console.log(values, imageUrl);
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/submit`,
         { ...values, image: imageUrl }
@@ -253,8 +250,6 @@ export default function DetailsForm() {
       <Formik
         initialValues={initialValues}
         onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
-
           handleSubmit(values, setSubmitting);
         }}
         validationSchema={validationSchema}
@@ -370,7 +365,7 @@ export default function DetailsForm() {
 
             <Field name="image">
               {({ field, form: { touched, errors }, meta }) => {
-                console.log(errors.image, touched.image);
+                console.log(errors.image, touched);
 
                 return (
                   <div class="input-wrapper">
@@ -387,7 +382,6 @@ export default function DetailsForm() {
                         onChange={(e) => {
                           handleFileUpload(e, values, setValues);
                         }}
-                        {...field}
                       />
 
                       {values.image ? (
