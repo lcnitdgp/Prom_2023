@@ -1,19 +1,80 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BranchData } from "./constants/BranchData";
 import { clubs, startRollNumber, studentYear } from "./constants";
 import axios from "axios";
-import { Button, Row, Col } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Spinner,
+  Button,
+  Toast,
+  ToastContainer,
+} from "react-bootstrap";
 import "./DetailsForm.css";
+import { Form as BootstrapForm } from "react-bootstrap";
+import { Form, Field, FieldArray, Formik } from "formik";
+import * as yup from "yup";
+
+const phoneRegExp =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+const requiredErrorMessage = "This field is required";
+const emailErrorMessage = "This email id is invalid";
+const phoneErrorMessage = "This phone number is invalid";
+const phoneLengthErrorMessage = "This phone number can only be 10 characters";
+const quoteErrorMessage = "Quote can only be 80 characters long";
+const duplicateErrorMessage = "Duplicate club entries found !";
+const requestTimeOutErrorMessage =
+  "Request Timed out! Please check your internet connection or please contact us if the issue persists.";
+const imageSizeErrorMessage = "Image size cannot be greater than 5mb";
+
+yup.addMethod(yup.array, "distinctEntries", function (errorMessage) {
+  return this.test(`test-distinct-entries`, errorMessage, function (value) {
+    const { path, createError } = this;
+
+    return (
+      [...new Set(value)].length === value.length ||
+      createError({ path, message: errorMessage })
+    );
+  });
+});
+
+yup.addMethod(yup.mixed, "maxImageSize", function (errorMessage) {
+  return this.test(`test-max-image-size`, errorMessage, function (value) {
+    const { path, createError } = this;
+
+    // console.log(value);
+    console.log(value);
+    console.log(atob(value.substring(value.indexOf(",") + 1)).length);
+
+    return (
+      atob(value.substring(value.indexOf(",") + 1)).length <= 5 * 1024 * 1024 ||
+      createError({ path, message: errorMessage })
+    );
+  });
+});
+
+const validationSchema = yup.object().shape({
+  name: yup.string().required(requiredErrorMessage),
+  department: yup.string().required(requiredErrorMessage),
+  rollNumber: yup.string().required(requiredErrorMessage),
+  email: yup.string().required(requiredErrorMessage).email(emailErrorMessage),
+  phone: yup
+    .string()
+    .required(requiredErrorMessage)
+    .matches(phoneRegExp, phoneErrorMessage)
+    .min(10, phoneLengthErrorMessage)
+    .max(10, phoneLengthErrorMessage),
+  image: yup.string().required(requiredErrorMessage),
+  clubs: yup.array().distinctEntries(duplicateErrorMessage),
+  quote: yup.string().max(80, quoteErrorMessage),
+  wing: yup.string(),
+});
 
 export default function DetailsForm() {
   const { department } = useParams();
-
-  const [formValues, setFormValues] = useState({
-    department,
-  });
-
-  const renderRollNumbers = () => {
+  const getRollNumbers = () => {
     var rollNumbers = [];
 
     for (var i = startRollNumber; i <= BranchData[department].end; i++) {
@@ -21,6 +82,31 @@ export default function DetailsForm() {
     }
     rollNumbers.concat(BranchData[department].additionalRollNumbers);
 
+    return rollNumbers;
+  };
+
+  const rollNumbers = getRollNumbers();
+  const navigate = useNavigate();
+
+  const [uploadingImage, setUploadingImage] = useState(false);
+  const [show, setShow] = useState(0);
+  const [error, setError] = useState(null);
+
+  const toggleShow = () => setShow(!show);
+
+  const initialValues = {
+    name: "",
+    department,
+    rollNumber: rollNumbers[0],
+    email: "",
+    phone: "",
+    image: "",
+    clubs: [],
+    quote: "",
+    wing: "",
+  };
+
+  const renderRollNumbers = () => {
     return rollNumbers.map((rollNumber) => {
       return (
         <option
@@ -37,291 +123,411 @@ export default function DetailsForm() {
     });
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormValues((prevFormValues) => ({
-      ...prevFormValues,
-      [name]: value,
-    }));
-  };
-
-  const handleFileUpload = (e) => {
+  const handleFileUpload = (e, values, setValues) => {
     let reader = new FileReader();
     let file = e.target.files[0];
 
-    console.log(file);
-
     reader.onloadend = () => {
-      setFormValues((prevFormValues) => ({
-        ...prevFormValues,
+      // console.log(reader.result);
+      // field.onChange(e);
+
+      setValues({
+        ...values,
         image: reader.result,
-      }));
+      });
     };
 
     reader.readAsDataURL(file);
   };
 
-  const handleClubAddition = (e) => {
-    setFormValues((prevFormValues) => ({
-      ...prevFormValues,
-      clubs: prevFormValues.clubs
-        ? [...prevFormValues.clubs, clubs[0]]
-        : [clubs[0]],
-    }));
+  const uploadImage = async (image) => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append(
+      "upload_preset",
+      process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET
+    );
+    data.append("folder", process.env.REACT_APP_CLOUDINARY_UPLOAD_FOLDER);
+
+    try {
+      const response = await axios.post(process.env.REACT_APP_CLOUD_URL, data);
+
+      console.log(response);
+
+      if (!response.data.url)
+        throw "Sorry, could not upload image.Please try again later.";
+
+      return response.data.url;
+    } catch (error) {
+      console.log(error);
+
+      if (error.code === "ERR_NETWORK") {
+        throw requestTimeOutErrorMessage;
+      }
+
+      throw error.stringify();
+    }
   };
 
-  const handleClubDeletion = (e, index) => {
-    console.log(index);
-
-    setFormValues((prevFormValues) => ({
-      ...prevFormValues,
-      clubs: prevFormValues.clubs.filter(
-        (element, innerIndex) => innerIndex !== index
-      ),
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    console.log(formValues, `${process.env.REACT_APP_BACKEND_URL}/submit`);
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/submit`, formValues);
-  };
-
-  const onChangeClubValue = (e, index) => {
-    setFormValues((prevFormValues) => ({
-      ...prevFormValues,
-      clubs: prevFormValues.clubs.map((element, innerIndex) => {
-        if (innerIndex === index) {
-          return e.target.value;
-        }
-        return element;
-      }),
-    }));
-  };
-  const renderClubs = (e) => {
-    console.log(formValues.clubs);
-
+  const renderErrorToast = () => {
     return (
-      <div className="d-grid">
-        {formValues.clubs
-          ? formValues.clubs.map((element, index) => {
-              return (
-                <Row>
-                  <Col xs={10}>
-                    <select
-                      className="input100 club-options-render"
-                      value={element}
-                      onChange={(e) => onChangeClubValue(e, index)}
-                    >
-                      {renderClubOptions()}
-                    </select>
-                  </Col>
-                  <Col>
-                    <button
-                      type="button"
-                      class="btn-close"
-                      aria-label="Close"
-                      onClick={(e) => handleClubDeletion(e, index)}
-                    ></button>
-                  </Col>
-                </Row>
-              );
-            })
-          : null}
-      </div>
+      <>
+        {/* <Button onClick={toggleShow} className="mb-2">
+          Toggle Toast <strong>with</strong> Animation
+        </Button> */}
+        <Toast show={show} onClose={toggleShow} className="error-toast-main">
+          <Toast.Header className="error-toast-header">
+            <strong className="ms-auto text-center error-toast-header-text">
+              Error
+            </strong>
+          </Toast.Header>
+          <Toast.Body className="error-toast text-center">{error}</Toast.Body>
+        </Toast>
+      </>
     );
   };
 
-  console.log(formValues);
+  const checkIfAlreadyExists = async (rollNumber) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/check/${rollNumber}`
+      );
+
+      console.log("Check if exists:", response);
+
+      if (response.data.error) throw response.data.error;
+    } catch (error) {
+      if (error.code === "ERR_NETWORK") {
+        throw requestTimeOutErrorMessage;
+      }
+
+      throw error;
+    }
+  };
+
+  const handleSubmit = async (values, setSubmitting) => {
+    try {
+      await checkIfAlreadyExists(values.rollNumber);
+
+      setUploadingImage(1);
+      const imageUrl = await uploadImage(values.image);
+      setUploadingImage(0);
+
+      const response = await axios.post(
+        `${process.env.REACT_APP_BACKEND_URL}/submit`,
+        { ...values, image: imageUrl }
+      );
+
+      if (response.data.success) {
+        navigate("/submit");
+      }
+
+      throw response.data.error;
+    } catch (error) {
+      const errorMessage = error.toString();
+
+      console.log(errorMessage);
+      setShow(1);
+      setError(errorMessage);
+    }
+    setSubmitting(false);
+  };
 
   return (
     <div className="DetailsForm">
       <div style={{ color: "#808080", fontSize: "13px", marginTop: "5px" }}>
         <center>
-          For more information, contact Shubham (
-          <a href="tel:9038055767">9038055767</a>) or Mohit (
+          For more information, contact Aditya Mitra (
+          <a href="tel:9038055767">9038055767</a>) or M (
           <a href="tel:9830372570">9830372570</a>).
         </center>
       </div>
-      <form
-        className="contact100-form validate-form"
-        id="student-form"
-        onSubmit={handleSubmit}
+
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values, { setSubmitting }) => {
+          console.log(values);
+
+          handleSubmit(values, setSubmitting);
+        }}
+        validationSchema={validationSchema}
       >
-        <div
-          className="wrap-input100 validate-input"
-          data-validate="Name is required"
-        >
-          <span className="label-input100">
-            <span>
-              Full Name:
-              <h5 style={{ color: "red" }}>*</h5>
-            </span>
-          </span>
-          <input
-            className="input100"
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Enter full name"
-            value={formValues.name}
-            onChange={handleChange}
-          />
-          <span className="focus-input100"></span>
-        </div>
+        {({ values, setValues, errors, touched, isSubmitting }) => (
+          <Form className="contact100-form">
+            <Field name="name">
+              {({ field, form: { touched, errors }, meta }) => (
+                <div class="input-wrapper">
+                  <div className="wrap-input100">
+                    <span className="label-input100">
+                      <span>
+                        Full Name:
+                        <h5 style={{ color: "red" }}>*</h5>
+                      </span>
+                    </span>
+                    <input className="input100" type="text" {...field} />
+                    <span className="error focus-input100"></span>
+                  </div>
+                  {errors.name && touched.name && (
+                    <div className="error-message">{errors.name}</div>
+                  )}
+                </div>
+              )}
+            </Field>
 
-        <div className="wrap-input100">
-          <span className="label-input100">Department</span>
-          <input
-            className="input100"
-            type="text"
-            name="department"
-            id="department"
-            value={formValues.department}
-            readOnly
-          />
-          <span className="focus-input100"></span>
-        </div>
+            <Field name="department">
+              {({ field, form: { touched, errors }, meta }) => (
+                <div class="input-wrapper">
+                  <div className="wrap-input100">
+                    <span className="label-input100">
+                      <span>
+                        Department:
+                        <h5 style={{ color: "red" }}>*</h5>
+                      </span>
+                    </span>
+                    <input
+                      className="input100"
+                      type="text"
+                      {...field}
+                      readOnly
+                    />
+                    <span className="focus-input100"></span>
+                  </div>
+                  {errors.department && touched.department && (
+                    <div className="error-message">{errors.department}</div>
+                  )}
+                </div>
+              )}
+            </Field>
 
-        <div className="wrap-input100">
-          <span className="label-input100">
-            Roll No.
-            <h5 style={{ color: "red" }}>*</h5>
-          </span>
+            <Field name="rollNumber">
+              {({ field, form: { touched, errors }, meta }) => (
+                <div class="input-wrapper">
+                  <div className="wrap-input100">
+                    <span className="label-input100">
+                      Roll No.
+                      <h5 style={{ color: "red" }}>*</h5>
+                    </span>
 
-          <select
-            className="input100"
-            name="rollNumber"
-            value={formValues.rollNumber}
-            onChange={handleChange}
-          >
-            {renderRollNumbers()}
-          </select>
-          <span className="focus-input100"></span>
-        </div>
+                    <select className="input100" name="rollNumber" {...field}>
+                      {renderRollNumbers()}
+                    </select>
+                    <span className="focus-input100"></span>
+                  </div>
+                  {errors.rollNumber && touched.rollNumber && (
+                    <div className="error-message">{errors.rollNumber}</div>
+                  )}
+                </div>
+              )}
+            </Field>
 
-        <div
-          className="wrap-input100 validate-input"
-          data-validate="Valid email is required: ex@abc.xyz"
-        >
-          <span className="label-input100">
-            Email:
-            <h5 style={{ color: "red" }}>*</h5>
-          </span>
-          <input
-            className="input100"
-            type="email"
-            id="email"
-            name="email"
-            value={formValues.email}
-            onChange={handleChange}
-            placeholder="Enter email addess"
-          />
-          <span className="focus-input100"></span>
-        </div>
+            <Field name="email">
+              {({ field, form: { touched, errors }, meta }) => (
+                <div class="input-wrapper">
+                  <div className="wrap-input100">
+                    <span className="label-input100">
+                      <span>
+                        Email:
+                        <h5 style={{ color: "red" }}>*</h5>
+                      </span>
+                    </span>
+                    <input className="input100" type="text" {...field} />
+                    <span className="focus-input100"></span>
+                  </div>
+                  {errors.email && touched.email && (
+                    <div className="error-message">{errors.email}</div>
+                  )}
+                </div>
+              )}
+            </Field>
 
-        <div
-          className="wrap-input100 validate-input"
-          data-validate="Phone is required"
-        >
-          <span className="label-input100">
-            Phone:
-            <h5 style={{ color: "red" }}>*</h5>
-          </span>
-          <input
-            className="input100"
-            type="number"
-            name="phone"
-            value={formValues.phone}
-            onChange={handleChange}
-            placeholder="Enter phone number"
-          />
-          <span className="focus-input100"></span>
-        </div>
+            <Field name="phone">
+              {({ field, form: { touched, errors }, meta }) => (
+                <div class="input-wrapper">
+                  <div className="wrap-input100">
+                    <span className="label-input100">
+                      <span>
+                        Phone:
+                        <h5 style={{ color: "red" }}>*</h5>
+                      </span>
+                    </span>
+                    <input className="input100" type="text" {...field} />
+                    <span className="focus-input100"></span>
+                  </div>
 
-        <div className="wrap-input100">
-          <span className="label-input100">Club(s):</span>
+                  {errors.phone && touched.phone && (
+                    <div className="error-message">{errors.phone}</div>
+                  )}
+                </div>
+              )}
+            </Field>
 
-          {renderClubs()}
+            <Field name="image">
+              {({ field, form: { touched, errors }, meta }) => {
+                console.log(errors.image, touched.image);
 
-          <div class="d-grid gap-2">
-            <button
-              class="btn btn-success add-button"
-              type="button"
-              onClick={handleClubAddition}
-            >
-              Add Club(s)(if any)
-            </button>
-          </div>
+                return (
+                  <div class="input-wrapper">
+                    <div className="wrap-input100 validate-input photo-wrapper">
+                      <span className="label-input100">
+                        Photo
+                        <h5 style={{ color: "red" }}>*</h5>
+                      </span>
 
-          <span className="focus-input100"></span>
-        </div>
+                      <BootstrapForm.Control
+                        type="file"
+                        name="photo"
+                        accept="image/*"
+                        onChange={(e) => {
+                          handleFileUpload(e, values, setValues);
+                        }}
+                      />
 
-        <div className="wrap-input100 validate-input photo-wrapper">
-          <span className="label-input100">
-            Photo
-            <h5 style={{ color: "red" }}>*</h5>
-          </span>
-          <input
-            type="file"
-            name="photo"
-            id="photo"
-            accept="image/*"
-            style={{ width: "100%" }}
-            onChange={handleFileUpload}
-          />
+                      {values.image ? (
+                        <img id="photo-display" src={values.image} />
+                      ) : null}
 
-          {formValues.image ? (
-            <img id="photo-display" src={formValues.image} />
-          ) : null}
+                      <span className="focus-input100"></span>
+                    </div>
 
-          <span className="focus-input100"></span>
-        </div>
+                    {errors.image && touched.image && (
+                      <div className="error-message">{errors.image}</div>
+                    )}
+                  </div>
+                );
+              }}
+            </Field>
 
-        <div className="wrap-input100">
-          <span className="label-input100">Wing:</span>
-          <input
-            type="text"
-            name="wing"
-            id="wing"
-            className="input100"
-            placeholder="Name of your wing(if any)"
-            value={formValues.wing}
-            onChange={handleChange}
-          />
-          <span className="focus-input100"></span>
-        </div>
+            <FieldArray name="clubs">
+              {(arrayHelpers) => (
+                <div class="input-wrapper">
+                  <div className="wrap-input100">
+                    <span className="label-input100">Clubs:</span>
 
-        <div className="wrap-input100">
-          <span className="label-input100">Quote:</span>
-          <input
-            className="input100"
-            type="text"
-            name="quote"
-            id="quote"
-            placeholder="Enter a Quote (Max 80 characters)"
-            maxLength="80"
-            value={formValues.quote}
-            onChange={handleChange}
-          />
-          <span className="focus-input100"></span>
-        </div>
-        <div className="container-contact100-form-btn d-grid gap-2">
-          <button
-            className="submit-button btn-block btn btn-success btn-lg"
-            style={{ backgroundColor: "#57b846" }}
-          >
-            <span>
-              Submit
-              <i
-                className="fa fa-long-arrow-right m-l-7"
-                aria-hidden="true"
-              ></i>
-            </span>
-          </button>
-        </div>
-      </form>
+                    <div class="d-grid gap-2">
+                      <button
+                        className="btn btn-success add-button"
+                        type="button"
+                        onClick={() => arrayHelpers.push(clubs[0])}
+                      >
+                        Add Club(s)
+                      </button>
+                    </div>
+
+                    {values.clubs && values.clubs.length > 0
+                      ? values.clubs.map((friend, index) => (
+                          <div key={index}>
+                            <Row>
+                              <Col xs={10}>
+                                <Field
+                                  className="input-wrapper"
+                                  name={`clubs.${index}`}
+                                >
+                                  {({
+                                    field,
+                                    form: { touched, errors },
+                                    meta,
+                                  }) => (
+                                    <div className="wrap-input100 club-options-render">
+                                      <select
+                                        className="input100"
+                                        {...field}
+                                        size="sm"
+                                      >
+                                        {renderClubOptions()}
+                                      </select>
+                                      <span className="focus-input100"></span>
+                                    </div>
+                                  )}
+                                </Field>
+                              </Col>
+                              <Col>
+                                <button
+                                  type="button"
+                                  class="btn-close"
+                                  aria-label="Close"
+                                  onClick={() => arrayHelpers.remove(index)}
+                                ></button>
+                              </Col>
+                            </Row>
+
+                            <span className="focus-input100"></span>
+                          </div>
+                        ))
+                      : null}
+                  </div>
+
+                  {errors.clubs && (
+                    <div className="error-message">{errors.clubs}</div>
+                  )}
+                </div>
+              )}
+            </FieldArray>
+
+            <Field name="wing">
+              {({ field, form: { touched, errors }, meta }) => (
+                <div class="input-wrapper">
+                  <div className="wrap-input100">
+                    <span className="label-input100">
+                      <span>Wing:</span>
+                    </span>
+                    <input className="input100" type="text" {...field} />
+                    <span className="focus-input100"></span>
+                  </div>
+                  {errors.wing && touched.wing && (
+                    <div className="error-message">{errors.wing}</div>
+                  )}
+                </div>
+              )}
+            </Field>
+
+            <Field name="quote">
+              {({ field, form: { touched, errors }, meta }) => (
+                <div class="input-wrapper">
+                  <div className="wrap-input100">
+                    <span className="label-input100">
+                      <span>Quote:</span>
+                    </span>
+                    <input className="input100" type="text" {...field} />
+                    <span className="focus-input100"></span>
+                  </div>
+                  {errors.quote && touched.quote && (
+                    <div className="error-message">{errors.quote}</div>
+                  )}
+                </div>
+              )}
+            </Field>
+
+            <div className="container-contact100-form-btn d-grid gap-2">
+              {show ? renderErrorToast() : null}
+
+              <button
+                className="btn-block contact100-form-btn"
+                disabled={isSubmitting}
+                type="submit"
+              >
+                <span class="submit-wrapper">
+                  {isSubmitting ? (
+                    <>
+                      {uploadingImage ? "Uploading Image..." : "Loading..."}
+                      <span className="loading"></span>
+                      <Spinner animation="border" variant="light" />
+                    </>
+                  ) : (
+                    <>
+                      Submit
+                      <i
+                        className="fa fa-long-arrow-right m-l-7"
+                        aria-hidden="true"
+                      ></i>
+                    </>
+                  )}
+                </span>
+              </button>
+            </div>
+          </Form>
+        )}
+      </Formik>
+
       <div id="dropDownSelect1"></div>
     </div>
   );

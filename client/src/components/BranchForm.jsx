@@ -29,7 +29,7 @@ const BranchForm = (props) => {
 
   return (
     <form
-      className="contact100-form validate-form"
+      className="contact100-form"
       name="regform"
       onSubmit={onSubmitBranchForm}
     >
@@ -46,7 +46,10 @@ const BranchForm = (props) => {
         <span className="focus-input100"></span>
       </div>
 
-      <div className="container-contact100-form-btn d-grid">
+      <div
+        className="container-contact100-form-btn d-grid"
+        style={{ marginTop: "5px" }}
+      >
         <button className="btn-block contact100-form-btn">
           <span>
             Submit
