@@ -5,9 +5,9 @@ function FormSubmitted() {
         <center>
           Thanks for your submission.
           <br />
-          For any help or queries, contact Shubham (
-          <a href="tel:9038055767">9038055767</a>) or Mohit (
-          <a href="tel:9830372570">9830372570</a>).
+          For any help or queries, contact Aditya Mitra (
+          <a href="tel:9331055168">9331055168</a>) or Murtaza Khumusi (
+          <a href="tel:8169426180">8169426180</a>).
           <p style={{ margin: "30px 0" }}>
             <a href="/" style={{ fontSize: "17px" }}>
               Add another submission.

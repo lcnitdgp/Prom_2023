@@ -18,7 +18,7 @@ const BranchForm = (props) => {
 
   const renderOptions = () => {
     return branchs.map((branch) => {
-      return <option value={branch}>{branch}</option>;
+      return <option value={branch}>{BranchData[branch].name}</option>;
     });
   };
 

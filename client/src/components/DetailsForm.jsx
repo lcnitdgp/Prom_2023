@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BranchData } from "./constants/BranchData";
-import { clubs, startRollNumber, studentYear } from "./constants";
+import { clubs, studentYear } from "./constants";
 import axios from "axios";
 import {
   Row,
@@ -76,14 +76,21 @@ const validationSchema = yup.object().shape({
 });
 
 export default function DetailsForm() {
-  const { department } = useParams();
+  const { code } = useParams();
+
+  console.log(code);
+
+  const department = BranchData[code].name;
+
   const getRollNumbers = () => {
     var rollNumbers = [];
 
-    for (var i = startRollNumber; i <= BranchData[department].end; i++) {
-      rollNumbers.push(`${studentYear}${department}${i}`);
+    console.log(BranchData[code]);
+
+    for (var i = BranchData[code].start; i <= BranchData[code].end; i++) {
+      rollNumbers.push(`${studentYear}${BranchData[code].code}${i}`);
     }
-    rollNumbers.concat(BranchData[department].additionalRollNumbers);
+    rollNumbers.concat(BranchData[code].additionalRollNumbers);
 
     return rollNumbers;
   };
@@ -241,9 +248,9 @@ export default function DetailsForm() {
     <div className="DetailsForm">
       <div style={{ color: "#808080", fontSize: "13px", marginTop: "5px" }}>
         <center>
-          For more information, contact Aditya Mitra (
-          <a href="tel:9038055767">9038055767</a>) or M (
-          <a href="tel:9830372570">9830372570</a>).
+          For any queries or information, contact Aditya Mitra (
+          <a href="tel:9331055168">9331055168</a>) or Murtaza Khumusi (
+          <a href="tel:8169426180">8169426180</a>).
         </center>
       </div>
 
@@ -258,7 +265,7 @@ export default function DetailsForm() {
           <Form className="contact100-form">
             <Field name="name">
               {({ field, form: { touched, errors }, meta }) => (
-                <div class="input-wrapper">
+                <div className="input-wrapper">
                   <div className="wrap-input100">
                     <span className="label-input100">
                       <span>
@@ -403,7 +410,10 @@ export default function DetailsForm() {
               {(arrayHelpers) => (
                 <div class="input-wrapper">
                   <div className="wrap-input100">
-                    <span className="label-input100">Clubs:</span>
+                    <span className="label-input100">
+                      <div>Club/</div>
+                      <div>Team(s):</div>
+                    </span>
 
                     <div class="d-grid gap-2">
                       <button
@@ -411,7 +421,7 @@ export default function DetailsForm() {
                         type="button"
                         onClick={() => arrayHelpers.push(clubs[0])}
                       >
-                        Add Club(s)
+                        Add
                       </button>
                     </div>
 

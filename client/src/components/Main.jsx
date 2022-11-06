@@ -22,7 +22,7 @@ export default function Main() {
             className="contact100-form-title"
             style={{ backgroundImage: "url(/images/bg-01.jpg)" }}
           >
-            <span className="contact100-form-title-1"> Yearbook 2022 </span>
+            <span className="contact100-form-title-1"> Yearbook 2023 </span>
 
             <span className="contact100-form-title-2"> Literary Circle </span>
           </div>
