@@ -18,6 +18,10 @@ import * as yup from "yup";
 
 const phoneRegExp =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const emojiRegex =
+  /[\u{1f300}-\u{1f5ff}\u{1f900}-\u{1f9ff}\u{1f600}-\u{1f64f}\u{1f680}-\u{1f6ff}\u{2600}-\u{26ff}\u{2700}-\u{27bf}\u{1f1e6}-\u{1f1ff}\u{1f191}-\u{1f251}\u{1f004}\u{1f0cf}\u{1f170}-\u{1f171}\u{1f17e}-\u{1f17f}\u{1f18e}\u{3030}\u{2b50}\u{2b55}\u{2934}-\u{2935}\u{2b05}-\u{2b07}\u{2b1b}-\u{2b1c}\u{3297}\u{3299}\u{303d}\u{00a9}\u{00ae}\u{2122}\u{23f3}\u{24c2}\u{23e9}-\u{23ef}\u{25b6}\u{23f8}-\u{23fa}]/gu;
+const englishChractersRegex =
+  /^[ ~`!@#$%^&*()_+=[\]\{}|;':,.\/<>?a-zA-Z0-9-]+$/;
 
 const requiredErrorMessage = "This field is required";
 const emailErrorMessage = "This email id is invalid";
@@ -28,6 +32,10 @@ const duplicateErrorMessage = "Duplicate club entries found !";
 const requestTimeOutErrorMessage =
   "Request Timed out! Please check your internet connection or please contact us if the issue persists.";
 const imageSizeErrorMessage = "Image size cannot be greater than 5MB";
+const emojiErrorMessage = "This field cannot contain an emoji";
+const doubleQuotesErrorMessage = 'This field cannot contain double quotes(" ")';
+const englishCharactersErrorMessage =
+  "This field can only contain English alphabets(a-z,A-Z),numbers(0-9) and special characters( ~`!@#$%^&*()_+=[]{}|;':,./<>?- )";
 
 yup.addMethod(yup.array, "distinctEntries", function (errorMessage) {
   return this.test(`test-distinct-entries`, errorMessage, function (value) {
@@ -44,9 +52,7 @@ yup.addMethod(yup.string, "maxImageSize", function (errorMessage) {
   return this.test(`test-max-image-size`, errorMessage, function (value) {
     const { path, createError } = this;
 
-    let finalLength = value ? value.length : 0;
-
-    console.log(finalLength / (1024 * 1024));
+    const finalLength = value ? value.length : 0;
 
     return (
       finalLength <= 7 * 1024 * 1024 ||
@@ -55,8 +61,39 @@ yup.addMethod(yup.string, "maxImageSize", function (errorMessage) {
   });
 });
 
+yup.addMethod(yup.string, "checkNoEmojis", function (errorMessage) {
+  return this.test(`test-emoji-presence`, errorMessage, function (value) {
+    const { path, createError } = this;
+
+    return (
+      !emojiRegex.test(value) || createError({ path, message: errorMessage })
+    );
+  });
+});
+
+yup.addMethod(yup.string, "checkNoDoubleQuotes", function (errorMessage) {
+  return this.test(
+    `test-double-quote-presence`,
+    errorMessage,
+    function (value) {
+      const { path, createError } = this;
+
+      console.log(value);
+
+      return (
+        (value ? !value.includes(`"`) : 1) ||
+        createError({ path, message: errorMessage })
+      );
+    }
+  );
+});
+
 const validationSchema = yup.object().shape({
-  name: yup.string().required(requiredErrorMessage),
+  name: yup
+    .string()
+    .required(requiredErrorMessage)
+    .checkNoEmojis(emojiErrorMessage)
+    .matches(englishChractersRegex, englishCharactersErrorMessage),
   department: yup.string().required(requiredErrorMessage),
   rollNumber: yup.string().required(requiredErrorMessage),
   email: yup.string().required(requiredErrorMessage).email(emailErrorMessage),
@@ -71,8 +108,17 @@ const validationSchema = yup.object().shape({
     .required(requiredErrorMessage)
     .maxImageSize(imageSizeErrorMessage),
   clubs: yup.array().distinctEntries(duplicateErrorMessage),
-  quote: yup.string().max(80, quoteErrorMessage),
-  wing: yup.string(),
+  wing: yup
+    .string()
+    .checkNoEmojis(emojiErrorMessage)
+    .checkNoDoubleQuotes(doubleQuotesErrorMessage)
+    .matches(englishChractersRegex, englishCharactersErrorMessage),
+  quote: yup
+    .string()
+    .max(80, quoteErrorMessage)
+    .checkNoEmojis(emojiErrorMessage)
+    .checkNoDoubleQuotes(doubleQuotesErrorMessage)
+    .matches(englishChractersRegex, englishCharactersErrorMessage),
 });
 
 export default function DetailsForm() {
