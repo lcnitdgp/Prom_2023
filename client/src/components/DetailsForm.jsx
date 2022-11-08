@@ -129,7 +129,7 @@ export default function DetailsForm() {
   const department = BranchData[code].name;
 
   const getRollNumbers = () => {
-    var rollNumbers = [];
+    var rollNumbers = BranchData[code].additionalRollNumbers;
 
     console.log(BranchData[code]);
 
