@@ -103,10 +103,7 @@ const validationSchema = yup.object().shape({
     .matches(phoneRegExp, phoneErrorMessage)
     .min(10, phoneLengthErrorMessage)
     .max(10, phoneLengthErrorMessage),
-  image: yup
-    .string()
-    .required(requiredErrorMessage)
-    .maxImageSize(imageSizeErrorMessage),
+  image: yup.string().maxImageSize(imageSizeErrorMessage),
   clubs: yup.array().distinctEntries(duplicateErrorMessage),
   wing: yup
     .string()
@@ -129,14 +126,15 @@ export default function DetailsForm() {
   const department = BranchData[code].name;
 
   const getRollNumbers = () => {
-    var rollNumbers = BranchData[code].additionalRollNumbers;
+    let rollNumbers = [];
+
+    rollNumbers.concat(BranchData[code].additionalRollNumbers);
 
     console.log(BranchData[code]);
 
     for (var i = BranchData[code].start; i <= BranchData[code].end; i++) {
       rollNumbers.push(`${studentYear}${BranchData[code].code}${i}`);
     }
-    rollNumbers.concat(BranchData[code].additionalRollNumbers);
 
     return rollNumbers;
   };
@@ -162,11 +160,13 @@ export default function DetailsForm() {
     wing: "",
   };
 
+  console.log(rollNumbers);
+
   const renderRollNumbers = () => {
     return rollNumbers.map((rollNumber) => {
       return (
         <option
-          key={rollNumber}
+          key={`${rollNumber}`}
           value={`${rollNumber}`}
         >{`${rollNumber}`}</option>
       );
@@ -265,14 +265,19 @@ export default function DetailsForm() {
     try {
       await checkIfAlreadyExists(values.rollNumber);
 
-      setUploadingImage(1);
-      const imageUrl = await uploadImage(values.image);
-      setUploadingImage(0);
+      let finalValues = { ...values };
 
-      console.log(values, imageUrl);
+      if (values.image) {
+        setUploadingImage(1);
+        const imageUrl = await uploadImage(values.image);
+        setUploadingImage(0);
+        console.log(values, imageUrl);
+        finalValues = { ...values, image: imageUrl };
+      }
+
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/submit`,
-        { ...values, image: imageUrl }
+        finalValues
       );
 
       if (response.data.success) {
@@ -331,7 +336,7 @@ export default function DetailsForm() {
 
             <Field name="department">
               {({ field, form: { touched, errors }, meta }) => (
-                <div class="input-wrapper">
+                <div className="input-wrapper">
                   <div className="wrap-input100">
                     <span className="label-input100">
                       <span>
@@ -423,10 +428,7 @@ export default function DetailsForm() {
                 return (
                   <div class="input-wrapper">
                     <div className="wrap-input100 validate-input photo-wrapper">
-                      <span className="label-input100">
-                        Photo
-                        <h5 style={{ color: "red" }}>*</h5>
-                      </span>
+                      <span className="label-input100">Photo</span>
 
                       <BootstrapForm.Control
                         type="file"

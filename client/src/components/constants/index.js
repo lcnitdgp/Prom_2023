@@ -25,7 +25,6 @@ export const clubs = [
   "NSS",
   "CHESS",
   "ECESS",
-  "BAJA",
   "MESA",
   "TnP Cell",
   "SAI Cell",
@@ -33,6 +32,8 @@ export const clubs = [
   "Basketball Team",
   "Cricket Team",
   "Football Team",
+  "Table Tennis Team",
   "Team NDORS",
+  "Team Vortex",
   "Team Robocon",
 ];
