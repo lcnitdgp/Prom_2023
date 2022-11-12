@@ -128,13 +128,15 @@ export default function DetailsForm() {
   const getRollNumbers = () => {
     let rollNumbers = [];
 
-    rollNumbers.concat(BranchData[code].additionalRollNumbers);
+    rollNumbers = rollNumbers.concat(BranchData[code].additionalRollNumbers);
 
     console.log(BranchData[code]);
 
     for (var i = BranchData[code].start; i <= BranchData[code].end; i++) {
       rollNumbers.push(`${studentYear}${BranchData[code].code}${i}`);
     }
+
+    console.log(rollNumbers, BranchData[code].additionalRollNumbers);
 
     return rollNumbers;
   };
