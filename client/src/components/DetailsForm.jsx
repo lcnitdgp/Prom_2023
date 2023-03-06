@@ -1,5 +1,5 @@
-import React from 'react';
-import {useState} from 'react';
+import React from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BranchData } from "./constants/BranchData";
 import { clubs, studentYear } from "./constants";
@@ -96,6 +96,7 @@ const validationSchema = yup.object().shape({
     .checkNoEmojis(emojiErrorMessage)
     .matches(englishChractersRegex, englishCharactersErrorMessage),
   department: yup.string().required(requiredErrorMessage),
+  year: yup.string().required(requiredErrorMessage),
   rollNumber: yup.string().required(requiredErrorMessage),
   email: yup.string().required(requiredErrorMessage).email(emailErrorMessage),
   phone: yup
@@ -105,18 +106,18 @@ const validationSchema = yup.object().shape({
     .min(10, phoneLengthErrorMessage)
     .max(10, phoneLengthErrorMessage),
   image: yup.string().maxImageSize(imageSizeErrorMessage),
-  clubs: yup.array().distinctEntries(duplicateErrorMessage),
-  wing: yup
-    .string()
-    .checkNoEmojis(emojiErrorMessage)
-    .checkNoDoubleQuotes(doubleQuotesErrorMessage)
-    .matches(englishChractersRegex, englishCharactersErrorMessage),
-  quote: yup
-    .string()
-    .max(80, quoteErrorMessage)
-    .checkNoEmojis(emojiErrorMessage)
-    .checkNoDoubleQuotes(doubleQuotesErrorMessage)
-    .matches(englishChractersRegex, englishCharactersErrorMessage),
+  // clubs: yup.array().distinctEntries(duplicateErrorMessage),
+  // wing: yup
+  //   .string()
+  //   .checkNoEmojis(emojiErrorMessage)
+  //   .checkNoDoubleQuotes(doubleQuotesErrorMessage)
+  //   .matches(englishChractersRegex, englishCharactersErrorMessage),
+  // quote: yup
+  //   .string()
+  //   .max(80, quoteErrorMessage)
+  //   .checkNoEmojis(emojiErrorMessage)
+  //   .checkNoDoubleQuotes(doubleQuotesErrorMessage)
+  //   .matches(englishChractersRegex, englishCharactersErrorMessage),
 });
 
 export default function DetailsForm() {
@@ -300,8 +301,8 @@ export default function DetailsForm() {
 
   return (
     <div className="outside-wrapper">
-        <div className="DetailsForm">
-      {/* <div style={{ color: "#808080", fontSize: "13px", marginTop: "5px" }}>
+      <div className="DetailsForm">
+        {/* <div style={{ color: "#808080", fontSize: "13px", marginTop: "5px" }}>
         <center>
           For any queries or information, contact Aditya Mitra (
           <a href="tel:9331055168">9331055168</a>) or Murtaza Khumusi (
@@ -309,79 +310,104 @@ export default function DetailsForm() {
         </center>
       </div> */}
 
-      <Formik
-        initialValues={initialValues}
-        onSubmit={(values, { setSubmitting }) => {
-          handleSubmit(values, setSubmitting);
-        }}
-        validationSchema={validationSchema}
-      >
-        {({ values, setValues, errors, touched, isSubmitting }) => (
-          <Form className="contact100-form">
-            <Field name="name">
-              {({ field, form: { touched, errors }, meta }) => (
-                <div className="input-wrapper">
-                  <div className="wrap-input100">
-                    <span className="label-input100">
-                      <span>Full Name: <b style={{ color: "red" }}>*</b>
+        <Formik
+          initialValues={initialValues}
+          onSubmit={(values, { setSubmitting }) => {
+            handleSubmit(values, setSubmitting);
+          }}
+          validationSchema={validationSchema}
+        >
+          {({ values, setValues, errors, touched, isSubmitting }) => (
+            <Form className="contact100-form">
+              <Field name="name">
+                {({ field, form: { touched, errors }, meta }) => (
+                  <div className="input-wrapper">
+                    <div className="wrap-input100">
+                      <span className="label-input100">
+                        <span>
+                          Full Name: <b style={{ color: "red" }}>*</b>
+                        </span>
                       </span>
-                    </span>
-                    <input className="input100" type="text" {...field} />
-                    <span className="error focus-input100"></span>
+                      <input className="input100" type="text" {...field} />
+                      <span className="error focus-input100"></span>
+                    </div>
+                    {errors.name && touched.name && (
+                      <div className="error-message">{errors.name}</div>
+                    )}
                   </div>
-                  {errors.name && touched.name && (
-                    <div className="error-message">{errors.name}</div>
-                  )}
-                </div>
-              )}
-            </Field>
+                )}
+              </Field>
 
-            <Field name="department">
-              {({ field, form: { touched, errors }, meta }) => (
-                <div className="input-wrapper">
-                  <div className="wrap-input100">
-                    <span className="label-input100">
-                      <span>
-                        Department: <b style={{ color: "red" }}>*</b>
+              {/* <Field name="department">
+                {({ field, form: { touched, errors }, meta }) => (
+                  <div className="input-wrapper">
+                    <div className="wrap-input100">
+                      <span className="label-input100">
+                        <span>
+                          Department: <b style={{ color: "red" }}>*</b>
+                        </span>
                       </span>
-                    </span>
-                    <input
-                      className="input100"
-                      type="text"
-                      {...field}
-                      readOnly
-                    />
-                    <span className="focus-input100"></span>
+                      <input
+                        className="input100"
+                        type="text"
+                        {...field}
+                        readOnly
+                      />
+                      <span className="focus-input100"></span>
+                    </div>
+                    {errors.department && touched.department && (
+                      <div className="error-message">{errors.department}</div>
+                    )}
                   </div>
-                  {errors.department && touched.department && (
-                    <div className="error-message">{errors.department}</div>
-                  )}
-                </div>
-              )}
-            </Field>
+                )}
+              </Field> */}
 
-            <Field name="rollNumber">
-              {({ field, form: { touched, errors }, meta }) => (
-                <div class="input-wrapper">
-                  <div className="wrap-input100">
-                    <span className="label-input100">
-                      Roll No.: <b style={{ color: "red" }}>*</b>
-                       
-                    </span>
+<Field name="rollNumber2">
+                {({ field, form: { touched, errors }, meta }) => (
+                  <div class="input-wrapper">
+                    <div className="wrap-input100">
+                      <span className="label-input100">
+                        Year of Member2: <b style={{ color: "red" }}>*</b>
+                      </span>
 
-                    <select className="input100" name="rollNumber" {...field}>
-                      {renderRollNumbers()}
-                    </select>
-                    <span className="focus-input100"></span>
+                      <select className="input100" name="rollNumber" {...field}>
+                        <option value="select">Select...</option>
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                        {/* {renderClubOptions()} */}
+                      </select>
+                      <span className="focus-input100"></span>
+                    </div>
+                    {errors.rollNumber && touched.rollNumber && (
+                      <div className="error-message">{errors.rollNumber}</div>
+                    )}
                   </div>
-                  {errors.rollNumber && touched.rollNumber && (
-                    <div className="error-message">{errors.rollNumber}</div>
-                  )}
-                </div>
-              )}
-            </Field>
+                )}
+              </Field>
 
-            <Field name="email">
+              <Field name="rollNumber">
+                {({ field, form: { touched, errors }, meta }) => (
+                  <div class="input-wrapper">
+                    <div className="wrap-input100">
+                      <span className="label-input100">
+                        Roll No.: <b style={{ color: "red" }}>*</b>
+                      </span>
+
+                      <select className="input100" name="rollNumber" {...field}>
+                        {renderRollNumbers()}
+                      </select>
+                      <span className="focus-input100"></span>
+                    </div>
+                    {errors.rollNumber && touched.rollNumber && (
+                      <div className="error-message">{errors.rollNumber}</div>
+                    )}
+                  </div>
+                )}
+              </Field>
+
+              {/* <Field name="email">
               {({ field, form: { touched, errors }, meta }) => (
                 <div class="input-wrapper">
                   <div className="wrap-input100">
@@ -398,29 +424,115 @@ export default function DetailsForm() {
                   )}
                 </div>
               )}
-            </Field>
+            </Field> */}
 
-            <Field name="phone">
-              {({ field, form: { touched, errors }, meta }) => (
-                <div class="input-wrapper">
-                  <div className="wrap-input100">
-                    <span className="label-input100">
-                      <span>
-                        Phone: <b style={{ color: "red" }}>*</b>
+              <Field name="phone">
+                {({ field, form: { touched, errors }, meta }) => (
+                  <div class="input-wrapper">
+                    <div className="wrap-input100">
+                      <span className="label-input100">
+                        <span>
+                          Phone: <b style={{ color: "red" }}>*</b>
+                        </span>
                       </span>
-                    </span>
-                    <input className="input100" type="text" {...field} />
-                    <span className="focus-input100"></span>
+                      <input className="input100" type="text" {...field} />
+                      <span className="focus-input100"></span>
+                    </div>
+
+                    {errors.phone && touched.phone && (
+                      <div className="error-message">{errors.phone}</div>
+                    )}
                   </div>
+                )}
+              </Field>
 
-                  {errors.phone && touched.phone && (
-                    <div className="error-message">{errors.phone}</div>
-                  )}
-                </div>
-              )}
-            </Field>
+              <Field name="name2">
+                {({ field, form: { touched, errors }, meta }) => (
+                  <div className="input-wrapper">
+                    <div className="wrap-input100">
+                      <span className="label-input100">
+                        <span>
+                          Full Name of Member 2:{" "}
+                          <b style={{ color: "red" }}>*</b>
+                        </span>
+                      </span>
+                      <input className="input100" type="text" {...field} />
+                      <span className="error focus-input100"></span>
+                    </div>
+                    {errors.name && touched.name && (
+                      <div className="error-message">{errors.name}</div>
+                    )}
+                  </div>
+                )}
+              </Field>
 
-            <Field name="image">
+              <Field name="rollNumber2">
+                {({ field, form: { touched, errors }, meta }) => (
+                  <div class="input-wrapper">
+                    <div className="wrap-input100">
+                      <span className="label-input100">
+                        Year of Member2: <b style={{ color: "red" }}>*</b>
+                      </span>
+
+                      <select className="input100" name="rollNumber" {...field}>
+                        <option value="select">Select...</option>
+                        <option value="1st Year">1st Year</option>
+                        <option value="2nd Year">2nd Year</option>
+                        <option value="3rd Year">3rd Year</option>
+                        <option value="4th Year">4th Year</option>
+                        {/* {renderClubOptions()} */}
+                      </select>
+                      <span className="focus-input100"></span>
+                    </div>
+                    {errors.rollNumber && touched.rollNumber && (
+                      <div className="error-message">{errors.rollNumber}</div>
+                    )}
+                  </div>
+                )}
+              </Field>
+
+              <Field name="rollNumber2">
+                {({ field, form: { touched, errors }, meta }) => (
+                  <div class="input-wrapper">
+                    <div className="wrap-input100">
+                      <span className="label-input100">
+                        Roll Number of Member2:{" "}
+                        <b style={{ color: "red" }}>*</b>
+                      </span>
+
+                      <select className="input100" name="rollNumber" {...field}>
+                        {renderRollNumbers()}
+                      </select>
+                      <span className="focus-input100"></span>
+                    </div>
+                    {errors.rollNumber && touched.rollNumber && (
+                      <div className="error-message">{errors.rollNumber}</div>
+                    )}
+                  </div>
+                )}
+              </Field>
+
+              <Field name="phone">
+                {({ field, form: { touched, errors }, meta }) => (
+                  <div class="input-wrapper">
+                    <div className="wrap-input100">
+                      <span className="label-input100">
+                        <span>
+                          Phone of member2: <b style={{ color: "red" }}>*</b>
+                        </span>
+                      </span>
+                      <input className="input100" type="text" {...field} />
+                      <span className="focus-input100"></span>
+                    </div>
+
+                    {errors.phone && touched.phone && (
+                      <div className="error-message">{errors.phone}</div>
+                    )}
+                  </div>
+                )}
+              </Field>
+
+              {/* <Field name="image">
               {({ field, form: { touched, errors }, meta }) => {
                 console.log(errors.image, touched);
 
@@ -461,9 +573,9 @@ export default function DetailsForm() {
                   </div>
                 );
               }}
-            </Field>
+            </Field> */}
 
-            <FieldArray name="clubs">
+              {/* <FieldArray name="clubs">
               {(arrayHelpers) => (
                 <div class="input-wrapper">
                   <div className="wrap-input100">
@@ -530,9 +642,9 @@ export default function DetailsForm() {
                   )}
                 </div>
               )}
-            </FieldArray>
+            </FieldArray> */}
 
-            <Field name="wing">
+              {/* <Field name="wing">
               {({ field, form: { touched, errors }, meta }) => (
                 <div class="input-wrapper">
                   <div className="wrap-input100">
@@ -547,9 +659,9 @@ export default function DetailsForm() {
                   )}
                 </div>
               )}
-            </Field>
+            </Field> */}
 
-            <Field name="quote">
+              {/* <Field name="quote">
               {({ field, form: { touched, errors }, meta }) => (
                 <div class="input-wrapper">
                   <div className="wrap-input100">
@@ -564,41 +676,41 @@ export default function DetailsForm() {
                   )}
                 </div>
               )}
-            </Field>
+            </Field> */}
 
-            <div className="container-contact100-form-btn d-grid gap-2">
-              {show ? renderErrorToast() : null}
+              <div className="container-contact100-form-btn d-grid gap-2">
+                {show ? renderErrorToast() : null}
 
-              <button
-                className="btn-block contact100-form-btn"
-                disabled={isSubmitting}
-                type="submit"
-              >
-                <span class="submit-wrapper">
-                  {isSubmitting ? (
-                    <>
-                      {uploadingImage ? "Uploading Image..." : "Loading..."}
-                      <span className="loading"></span>
-                      <Spinner animation="border" variant="light" />
-                    </>
-                  ) : (
-                    <>
-                      Submit
-                      <i
-                        className="fa fa-long-arrow-right m-l-7"
-                        aria-hidden="true"
-                      ></i>
-                    </>
-                  )}
-                </span>
-              </button>
-            </div>
-          </Form>
-        )}
-      </Formik>
+                <button
+                  className="btn-block contact100-form-btn"
+                  disabled={isSubmitting}
+                  type="submit"
+                >
+                  <span class="submit-wrapper">
+                    {isSubmitting ? (
+                      <>
+                        {uploadingImage ? "Uploading Image..." : "Loading..."}
+                        <span className="loading"></span>
+                        <Spinner animation="border" variant="light" />
+                      </>
+                    ) : (
+                      <>
+                        Submit
+                        <i
+                          className="fa fa-long-arrow-right m-l-7"
+                          aria-hidden="true"
+                        ></i>
+                      </>
+                    )}
+                  </span>
+                </button>
+              </div>
+            </Form>
+          )}
+        </Formik>
 
-      <div id="dropDownSelect1"></div>
-    </div>
+        <div id="dropDownSelect1"></div>
+      </div>
     </div>
   );
 }
