@@ -542,7 +542,9 @@ export default function DetailsForm() {
                       <span className="label-input100"> 
                         Photo:
                     </span>
-                      <BootstrapForm.Control
+                    
+                    <div style={{border: "1px solid black", top: "10px", borderRadius: "2px"}}>
+                     <BootstrapForm.Control
                         type="file"
                         name="photo"
                         accept="image/*"
@@ -551,21 +553,19 @@ export default function DetailsForm() {
                         }}
                         style={{opacity: "0%"}}
                       />
-                       <p style={{ position: 'absolute',
-                        // width: "100%",
+                       <p className='photo' style={{ position: 'absolute',
+                         width: "100%",
                         zIndex: "-1",
                         top: "30px",
                         alignItems:"center",
-                        left: "40%", 
-                        border: "1px solid black",
-                        borderRadius: "4px",
-                        padding: "2px"}}>Choose File</p>
+                        }}>Choose File</p>
                       {values.image ? (
                         <img id="photo-display" src={values.image} />
                       ) : null}
 
                       <span className="focus-input100" ></span>
                     </div>
+                   </div>
 
                     {errors.image && touched.image && (
                       <div className="error-message">{errors.image}</div>

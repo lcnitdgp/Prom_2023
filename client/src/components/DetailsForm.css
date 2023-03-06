@@ -68,3 +68,14 @@
 .DetailsForm{
   background: transparent;
 }
+
+@media (max-width: 992px){
+  .photo{
+    left: 40%;
+  }
+}
+@media(min-width: 993px){
+  .photo{
+    left: 40%;
+  }
+}

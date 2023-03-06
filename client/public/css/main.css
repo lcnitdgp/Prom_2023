@@ -518,9 +518,22 @@ textarea.input100 {
 }
 
 @media (max-width: 992px) {
+  
   .alert-validate::before {
     visibility: visible;
     opacity: 1;
+  }
+  .contact100-form {
+    padding: 43px 15px 57px 15px;
+  }
+
+  .label-input100 {
+    text-align: left;
+    position: unset;
+    top: unset;
+    left: unset;
+    width: 100%;
+    padding: 0 5px;
   }
 }
 
