@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import { Outlet } from "react-router-dom";
 
 export default function Main() {
@@ -18,14 +18,14 @@ export default function Main() {
         ></div>
 
         <div className="wrap-contact100">
-          <div
+          {/* <div
             className="contact100-form-title"
             style={{ backgroundImage: "url(/images/bg-01.jpg)" }}
-          >
+          > 
             <span className="contact100-form-title-1"> Yearbook 2023 </span>
 
             <span className="contact100-form-title-2"> Literary Circle </span>
-          </div>
+          </div> */}
 
           <Outlet />
         </div>
