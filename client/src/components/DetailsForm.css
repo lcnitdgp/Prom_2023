@@ -61,3 +61,10 @@
   font-size: 1rem;
   text-decoration-line: underline;
 }
+
+.outside-wrapper{
+  background: transparent;
+}
+.DetailsForm{
+  background: transparent;
+}

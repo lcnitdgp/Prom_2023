@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from 'react';
+import {useState} from 'react';
 import { useNavigate, useParams } from "react-router-dom";
 import { BranchData } from "./constants/BranchData";
 import { clubs, studentYear } from "./constants";
@@ -298,14 +299,15 @@ export default function DetailsForm() {
   };
 
   return (
-    <div className="DetailsForm">
-      <div style={{ color: "#808080", fontSize: "13px", marginTop: "5px" }}>
+    <div className="outside-wrapper">
+        <div className="DetailsForm">
+      {/* <div style={{ color: "#808080", fontSize: "13px", marginTop: "5px" }}>
         <center>
           For any queries or information, contact Aditya Mitra (
           <a href="tel:9331055168">9331055168</a>) or Murtaza Khumusi (
           <a href="tel:8169426180">8169426180</a>).
         </center>
-      </div>
+      </div> */}
 
       <Formik
         initialValues={initialValues}
@@ -321,9 +323,7 @@ export default function DetailsForm() {
                 <div className="input-wrapper">
                   <div className="wrap-input100">
                     <span className="label-input100">
-                      <span>
-                        Full Name:
-                        <h5 style={{ color: "red" }}>*</h5>
+                      <span>Full Name: <b style={{ color: "red" }}>*</b>
                       </span>
                     </span>
                     <input className="input100" type="text" {...field} />
@@ -342,8 +342,7 @@ export default function DetailsForm() {
                   <div className="wrap-input100">
                     <span className="label-input100">
                       <span>
-                        Department:
-                        <h5 style={{ color: "red" }}>*</h5>
+                        Department: <b style={{ color: "red" }}>*</b>
                       </span>
                     </span>
                     <input
@@ -366,8 +365,8 @@ export default function DetailsForm() {
                 <div class="input-wrapper">
                   <div className="wrap-input100">
                     <span className="label-input100">
-                      Roll No.
-                      <h5 style={{ color: "red" }}>*</h5>
+                      Roll No.: <b style={{ color: "red" }}>*</b>
+                       
                     </span>
 
                     <select className="input100" name="rollNumber" {...field}>
@@ -388,8 +387,7 @@ export default function DetailsForm() {
                   <div className="wrap-input100">
                     <span className="label-input100">
                       <span>
-                        Email:
-                        <h5 style={{ color: "red" }}>*</h5>
+                        Email: <b style={{ color: "red" }}>*</b>
                       </span>
                     </span>
                     <input className="input100" type="text" {...field} />
@@ -408,8 +406,7 @@ export default function DetailsForm() {
                   <div className="wrap-input100">
                     <span className="label-input100">
                       <span>
-                        Phone:
-                        <h5 style={{ color: "red" }}>*</h5>
+                        Phone: <b style={{ color: "red" }}>*</b>
                       </span>
                     </span>
                     <input className="input100" type="text" {...field} />
@@ -429,9 +426,10 @@ export default function DetailsForm() {
 
                 return (
                   <div class="input-wrapper">
-                    <div className="wrap-input100 validate-input photo-wrapper">
-                      <span className="label-input100">Photo</span>
-
+                    <div className="wrap-input100 validate-input photo-wrapper" >
+                      <span className="label-input100"> 
+                        Photo:
+                    </span>
                       <BootstrapForm.Control
                         type="file"
                         name="photo"
@@ -439,13 +437,22 @@ export default function DetailsForm() {
                         onChange={(e) => {
                           handleFileUpload(e, values, setValues);
                         }}
+                        style={{opacity: "0%"}}
                       />
-
+                       <p style={{ position: 'absolute',
+                        // width: "100%",
+                        zIndex: "-1",
+                        top: "30px",
+                        alignItems:"center",
+                        left: "40%", 
+                        border: "1px solid black",
+                        borderRadius: "4px",
+                        padding: "2px"}}>Choose File</p>
                       {values.image ? (
                         <img id="photo-display" src={values.image} />
                       ) : null}
 
-                      <span className="focus-input100"></span>
+                      <span className="focus-input100" ></span>
                     </div>
 
                     {errors.image && touched.image && (
@@ -460,7 +467,7 @@ export default function DetailsForm() {
               {(arrayHelpers) => (
                 <div class="input-wrapper">
                   <div className="wrap-input100">
-                    <span className="label-input100">
+                    <span className="label-input100" style={{textAlign: "left"}}>
                       <div>Club/</div>
                       <div>Team(s):</div>
                     </span>
@@ -591,6 +598,7 @@ export default function DetailsForm() {
       </Formik>
 
       <div id="dropDownSelect1"></div>
+    </div>
     </div>
   );
 }

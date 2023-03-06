@@ -1,3 +1,4 @@
+import React from 'react';
 function FormSubmitted() {
   return (
     <div className="container">
