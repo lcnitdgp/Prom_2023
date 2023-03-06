@@ -3,17 +3,13 @@ const { Schema } = mongoose;
 
 const studentSchema = new Schema({
   name: String,
-  department: String,
+  year: String,
   rollNumber: {
     type: String,
     unique: true,
   },
-  email: String,
   phone: String,
-  image: String,
-  clubs: [String],
-  wing: String,
-  quote: String,
+  
   created: {
     type: Date,
     default: Date.now,

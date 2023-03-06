@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const Student = require("./models/Student");
+const Partner = require("./models/Partner");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 
@@ -39,9 +40,24 @@ app.post("/submit", async function (req, res) {
   console.log("The value is:", req.body);
 
   try {
-    const student = await Student.create(req.body);
+    // const student = await Student.create(req.body);
+    const partner = new Partner({"payTo":req.body.payTo,"paymentProof":req.body.paymentProof});
+    
+    
+    
+    req.body.students.forEach(async(element) =>{ 
+      
+      const student = await Student.create(element); 
+      partner.students.push(student._id);
+      console.log(student+",")
+      console.log(partner);
+      
 
-    console.log(student);
+    });
+    // const partner = new Partner(req.body.students,req.body.payTo,req.body.paymentProof);
+    
+    await partner.save();
+    // console.log(partner);
 
     res.status(200);
     res.json({ success: "The student has been added to the database" });
