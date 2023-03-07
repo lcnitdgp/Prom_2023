@@ -505,7 +505,6 @@ export default function DetailsForm() {
                         <span className="label-input100">
                           Payment Proof: <b style={{ color: "red" }}>*</b>
                         </span>
-
                         <div
                           style={{
                             border: "1px solid black",
@@ -528,7 +527,6 @@ export default function DetailsForm() {
                               position: "absolute",
                               width: "100%",
                               zIndex: "-1",
-                              top: "30px",
                               alignItems: "center",
                             }}
                           >
