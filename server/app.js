@@ -1,6 +1,5 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const Student = require("./models/Student");
 const Partner = require("./models/Partner");
 const bodyParser = require("body-parser");
 const cors = require("cors");
@@ -37,38 +36,16 @@ app.get("*", function (req, res) {
 
 //form upload
 app.post("/submit", async function (req, res) {
-  console.log("The value is:", req.body);
-
   try {
-    // const student = await Student.create(req.body);
-    const partner = new Partner({"payTo":req.body.payTo,"paymentProof":req.body.paymentProof});
-    
-    
-    
-    req.body.students.forEach(async(element) =>{ 
-      
-      const student = await Student.create(element); 
-      partner.students.push(student._id);
-      console.log(student+",")
-      console.log(partner);
-      
+    const partner = await Partner.create(req.body);
 
-    });
-    // const partner = new Partner(req.body.students,req.body.payTo,req.body.paymentProof);
-    
-    await partner.save();
-    // console.log(partner);
+    console.log(partner);
 
     res.status(200);
-    res.json({ success: "The student has been added to the database" });
+    res.json({ success: "The Partner has been added to the database" });
   } catch (err) {
     console.log(err.message);
 
-    if (err.message.includes("duplicate key")) {
-      return res.json({
-        error: `The entry corresponding to roll number ${req.body.rollNumber} has already been entered.`,
-      });
-    }
     res.json({
       error: "Request Timed out! Please check your internet connection.",
     });
@@ -79,15 +56,17 @@ app.post("/check/:rollNumber", async function (req, res) {
   console.log("The value is:", req.params.rollNumber);
 
   try {
-    const student = await Student.findOne({
-      rollNumber: req.params.rollNumber,
+    const partner = await Partner.findOne({
+      students: {
+        $elemMatch: { rollNumber: req.params.rollNumber },
+      },
     });
 
-    console.log(student);
+    console.log(partner);
 
     let result = {};
 
-    if (student) {
+    if (partner) {
       result = {
         error: `The entry corresponding to roll number ${req.params.rollNumber} has already been entered.`,
       };
