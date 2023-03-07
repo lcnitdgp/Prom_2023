@@ -16,7 +16,7 @@ function App() {
       <Route path="/" element={<Main />}>
         <Route index element={<BranchForm />} />
         <Route path="/submit" element={<FormSubmitted />} />
-        <Route path="/:code" element={<DetailsForm />} />
+        <Route path="/form" element={<DetailsForm />} />
         <Route path="/error" element={<InvalidPage />} />
       </Route>
     </Routes>
