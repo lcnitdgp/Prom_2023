@@ -169,7 +169,7 @@ textarea:-ms-input-placeholder {
 /*---------------------------------------------*/
 button {
   outline: none !important;
-  border: none;
+  /* border: none; */
   /* background: transparent; */ 
 }
 
