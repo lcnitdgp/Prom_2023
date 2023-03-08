@@ -7,24 +7,9 @@
  
   
    
- 
- .patterns {
-   height: 100vh;
- }
- 
- 
- 
- svg text {
-   font-family: Lora;
-   letter-spacing: 10px;
-   stroke: #bd7811;
-   font-size: 150px;
-   font-weight: 700;
-   stroke-width: 3;
-  
-   animation: textAnimate 5s infinite alternate;
-   
- }
+   .patterns {
+    height: 100vh;
+  }
  
  @keyframes textAnimate {
    0% {
@@ -343,22 +328,58 @@
     .register_button{
       left: 18%;
     }
+    svg text {
+      font-family: Lora;
+      stroke: #bd7811;
+      font-size: 68px;
+      font-weight: 700;
+      stroke-width: 2;
+      animation: textAnimate 5s infinite alternate;
+      
+    }
   }
   @media(min-width: 399px ) and (max-width: 500px){
     .register_button{
-      left: 30%;
+      left: 28%;
     }
-  
+    svg text {
+      font-family: Lora;
+      stroke: #bd7811;
+      font-size: 78px;
+      font-weight: 700;
+      stroke-width: 2;
+      animation: textAnimate 5s infinite alternate;
+      
+    }
   }
   @media(min-width: 501px ) and (max-width: 1300px){
     .register_button{
-      left: 40%;
+      left: 30%;
     }
-  
+    
+    svg text {
+      font-family: Lora;
+      letter-spacing: 4px;
+      stroke: #bd7811;
+      font-size: 90px;
+      font-weight: 700;
+      stroke-width: 2;
+      animation: textAnimate 5s infinite alternate;
+      
+    }
+    
   }
   @media (min-width: 1301px){
     .register_button{
       left: 40%;
     }
-    
+    svg text {
+      font-family: Lora;
+      stroke: #bd7811;
+      font-size: 150px;
+      font-weight: 700;
+      stroke-width: 2;
+      animation: textAnimate 5s infinite alternate;
+      
+    }
   }

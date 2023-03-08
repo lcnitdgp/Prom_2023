@@ -1,7 +1,5 @@
 import React from "react";
 import { useState } from "react";
-// import pushpal__qr from ".../public/images/pushpal__qr.jpg"
-// import archit_qr from ".../public/images/archit_qr.jpeg"
 import { useNavigate, useParams } from "react-router-dom";
 // import { BranchData } from "./constants/BranchData";
 // import { clubs, studentYear } from "./constants";
@@ -304,6 +302,7 @@ export default function DetailsForm() {
         >
           {({ values, setValues, errors, touched, isSubmitting }) => (
             <Form className="contact100-form">
+              <h2 style={{color: "white", margin: "2px"}}>MEMBER 1</h2>
               <Field name="name">
                 {({ field, form: { touched, errors }, meta }) => (
                   <div className="input-wrapper">
@@ -389,7 +388,7 @@ export default function DetailsForm() {
                   </div>
                 )}
               </Field>
-
+              <h2 style={{color: "white", margin: "2px"}}>MEMBER 2</h2>
               <Field name="name1">
                 {({ field, form: { touched, errors }, meta }) => (
                   <div className="input-wrapper">
@@ -475,19 +474,24 @@ export default function DetailsForm() {
                   </div>
                 )}
               </Field>
-
+             
               <Field name="payTo">
                 {({ field, form: { touched, errors }, meta }) => {
                   return (
                     <div class="input-wrapper">
                       <div className="wrap-input100">
                         <span className="label-input100">
-                          Payment To : <b style={{ color: "red" }}>*</b>
+                          Payment To : <b style={{ color: "red" }}>*</b> <br/>
+                          <div className="images_payment">
+                          <img src="images/pushpal__qr.jpg" style={{outterFit: "contain", width: "50%",padding: "2px"}}/>
+                          <img src="images/archit_qr.jpeg" style={{outterFit: "contain",  width: "50%",padding: "2px"}}/>
+                          </div>
+                          
                         </span>
 
                         <select className="input100" {...field}>
                           <option name="Pushpal">Pushpal
-                          <img src={pushpal__qr} /></option>
+                          </option>
                           
                           <option name="Archit">Archit
                          </option>

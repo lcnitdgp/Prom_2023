@@ -76,11 +76,19 @@
     margin-left: auto;
     margin-right: auto;
   }
+  .images_payment{
+    display: flex;
+    flex-direction: row;
+  }
 }
 @media (max-width: 992px){
   .photo{
     left: 40%;
     top: 38px;
+  }
+  .images_payment{
+    display: flex;
+    flex-direction: row;
   }
 }
 @media(min-width: 993px ) and (max-width: 1300px){
@@ -93,7 +101,10 @@
     left: 40%;
     top: 65px;
   }
-
+  .images_payment{
+    display: flex;
+    flex-direction: row;
+  }
 }
 @media (min-width: 1301px){
   .DetailsForm{
@@ -105,5 +116,8 @@
     left: 40%;
     top: 65px;
   }
-  
+  .images_payment{
+    display: flex;
+    flex-direction: row;
+  }
 }
