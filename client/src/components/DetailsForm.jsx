@@ -302,7 +302,9 @@ export default function DetailsForm() {
         >
           {({ values, setValues, errors, touched, isSubmitting }) => (
             <Form className="contact100-form">
-              <h2 style={{color: "white", margin: "2px"}}>MEMBER 1</h2>
+            <div>
+             <h2 style={{color: "white", margin: "2px"}}>MEMBER 1</h2>
+            </div>
               <Field name="name">
                 {({ field, form: { touched, errors }, meta }) => (
                   <div className="input-wrapper">
@@ -388,7 +390,10 @@ export default function DetailsForm() {
                   </div>
                 )}
               </Field>
+              <div>
               <h2 style={{color: "white", margin: "2px"}}>MEMBER 2</h2>
+              </div>
+              
               <Field name="name1">
                 {({ field, form: { touched, errors }, meta }) => (
                   <div className="input-wrapper">

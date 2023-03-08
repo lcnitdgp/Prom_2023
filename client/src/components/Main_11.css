@@ -357,7 +357,7 @@
       stroke: #bd7811;
       font-size: 78px;
       font-weight: 700;
-      stroke-width: 2;
+      stroke-width: 3;
       animation: textAnimate 5s infinite alternate;
       
     }
@@ -383,7 +383,7 @@
       stroke: #bd7811;
       font-size: 90px;
       font-weight: 700;
-      stroke-width: 2;
+      stroke-width: 4;
       animation: textAnimate 5s infinite alternate;
       
     }
@@ -407,7 +407,7 @@
       stroke: #bd7811;
       font-size: 150px;
       font-weight: 700;
-      stroke-width: 2;
+      stroke-width: 4;
       animation: textAnimate 5s infinite alternate;
       
     }
