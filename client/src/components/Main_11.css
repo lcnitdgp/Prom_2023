@@ -337,6 +337,12 @@
       animation: textAnimate 5s infinite alternate;
       
     }
+    .verve_logo{
+      width: 18%;
+    }
+    .lc_logo{
+      width: 18%;
+    }
   }
   @media(min-width: 399px ) and (max-width: 500px){
     .register_button{
@@ -350,6 +356,12 @@
       stroke-width: 2;
       animation: textAnimate 5s infinite alternate;
       
+    }
+    .verve_logo{
+      width: 14%;
+    }
+    .lc_logo{
+      width: 14%;
     }
   }
   @media(min-width: 501px ) and (max-width: 1300px){
@@ -367,7 +379,12 @@
       animation: textAnimate 5s infinite alternate;
       
     }
-    
+    .verve_logo{
+      width: 8%;
+    }
+    .lc_logo{
+      width: 8%;
+    }
   }
   @media (min-width: 1301px){
     .register_button{
@@ -381,5 +398,11 @@
       stroke-width: 2;
       animation: textAnimate 5s infinite alternate;
       
+    }
+    .verve_logo{
+      width: 8%;
+    }
+    .lc_logo{
+      width: 8%;
     }
   }

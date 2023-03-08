@@ -482,10 +482,16 @@ export default function DetailsForm() {
                       <div className="wrap-input100">
                         <span className="label-input100">
                           Payment To : <b style={{ color: "red" }}>*</b> <br/>
-                          <div className="images_payment">
-                          <img src="images/pushpal__qr.jpg" style={{outterFit: "contain", width: "50%",padding: "2px"}}/>
-                          <img src="images/archit_qr.jpeg" style={{outterFit: "contain",  width: "50%",padding: "2px"}}/>
-                          </div>
+                        <div className="images_payment">
+                         <figure>
+                           <img src="images/pushpal__qr.jpg" style={{outterFit: "contain", width: "100%",padding: "2px"}}/>
+                            <figcaption>pushpalghodaskar-1@okaxis</figcaption>
+                          </figure>
+                          <figure>
+                           <img src="images/archit_qr.jpeg" style={{outterFit: "contain", width: "100%",padding: "2px"}}/>
+                            <figcaption>9144648481@ibl</figcaption>
+                          </figure>
+                        </div>
                           
                         </span>
 

@@ -167,15 +167,15 @@ textarea:-ms-input-placeholder {
 }
 
 /*---------------------------------------------*/
-button {
+/* button {
   outline: none !important;
   /* border: none; */
-  /* background: transparent; */ 
-}
+  /* background: transparent; 
+} */
 
-button:hover {
+/* button:hover {
   cursor: pointer;
-}
+} */
 
 iframe {
   border: none !important;

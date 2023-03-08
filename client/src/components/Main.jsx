@@ -39,11 +39,14 @@ export default function Main() {
 
           <Outlet /> 
           </div> */}
-
+      <div >
+           <img src="images/verve_logo.png" className="verve_logo" />
+           <img src="images/lc_logo.png" className="lc_logo" />
+      </div>
       <div class="patterns" >
         <svg width="100%" height="70%">
           
-          <text x="50%" y="70%" text-anchor="middle">
+          <text x="50%" y="55%" text-anchor="middle">
             Prom Night
           </text>
         </svg>
