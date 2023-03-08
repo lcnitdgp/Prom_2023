@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
+// import pushpal__qr from ".../public/images/pushpal__qr.jpg"
+// import archit_qr from ".../public/images/archit_qr.jpeg"
 import { useNavigate, useParams } from "react-router-dom";
-import { BranchData } from "./constants/BranchData";
-import { clubs, studentYear } from "./constants";
+// import { BranchData } from "./constants/BranchData";
+// import { clubs, studentYear } from "./constants";
 import axios from "axios";
 import {
   Row,
@@ -484,8 +486,12 @@ export default function DetailsForm() {
                         </span>
 
                         <select className="input100" {...field}>
-                          <option name="Pushpal">Pushpal</option>
-                          <option name="Archit">Archit</option>
+                          <option name="Pushpal">Pushpal
+                          <img src={pushpal__qr} /></option>
+                          
+                          <option name="Archit">Archit
+                         </option>
+                          
                         </select>
                         <span className="focus-input100"></span>
                       </div>
