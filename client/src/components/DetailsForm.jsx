@@ -1,8 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { BranchData } from "./constants/BranchData";
-import { clubs, studentYear } from "./constants";
+// import { BranchData } from "./constants/BranchData";
+// import { clubs, studentYear } from "./constants";
 import axios from "axios";
 import {
   Row,
@@ -302,6 +302,9 @@ export default function DetailsForm() {
         >
           {({ values, setValues, errors, touched, isSubmitting }) => (
             <Form className="contact100-form">
+            <div>
+             <h2 style={{color: "white", margin: "2px"}}>MEMBER 1</h2>
+            </div>
               <Field name="name">
                 {({ field, form: { touched, errors }, meta }) => (
                   <div className="input-wrapper">
@@ -387,7 +390,10 @@ export default function DetailsForm() {
                   </div>
                 )}
               </Field>
-
+              <div>
+              <h2 style={{color: "white", margin: "2px"}}>MEMBER 2</h2>
+              </div>
+              
               <Field name="name1">
                 {({ field, form: { touched, errors }, meta }) => (
                   <div className="input-wrapper">
@@ -473,19 +479,34 @@ export default function DetailsForm() {
                   </div>
                 )}
               </Field>
-
+             
               <Field name="payTo">
                 {({ field, form: { touched, errors }, meta }) => {
                   return (
                     <div class="input-wrapper">
                       <div className="wrap-input100">
                         <span className="label-input100">
-                          Payment To : <b style={{ color: "red" }}>*</b>
+                          Payment To : <b style={{ color: "red" }}>*</b> <br/>
+                        <div className="images_payment">
+                         <figure>
+                           <img src="images/pushpal__qr.jpg" style={{outterFit: "contain", width: "100%",padding: "2px"}}/>
+                            <figcaption>pushpalghodaskar-1@okaxis</figcaption>
+                          </figure>
+                          <figure>
+                           <img src="images/archit_qr.jpeg" style={{outterFit: "contain", width: "100%",padding: "2px"}}/>
+                            <figcaption>9144648481@ibl</figcaption>
+                          </figure>
+                        </div>
+                          
                         </span>
 
                         <select className="input100" {...field}>
-                          <option name="Pushpal">Pushpal</option>
-                          <option name="Archit">Archit</option>
+                          <option name="Pushpal">Pushpal
+                          </option>
+                          
+                          <option name="Archit">Archit
+                         </option>
+                          
                         </select>
                         <span className="focus-input100"></span>
                       </div>
@@ -505,7 +526,6 @@ export default function DetailsForm() {
                         <span className="label-input100">
                           Payment Proof: <b style={{ color: "red" }}>*</b>
                         </span>
-
                         <div
                           style={{
                             border: "1px solid black",
@@ -528,7 +548,6 @@ export default function DetailsForm() {
                               position: "absolute",
                               width: "100%",
                               zIndex: "-1",
-                              top: "30px",
                               alignItems: "center",
                             }}
                           >

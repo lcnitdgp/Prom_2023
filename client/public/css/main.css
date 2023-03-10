@@ -32,9 +32,10 @@
 
 body,
 html {
-  height: 100%;
+  /* height: 100%; */
   font-family: Poppins-Regular, sans-serif;
-  background: url(/images/webbg.jpeg) no-repeat center center fixed;
+  background: url(/images/webbg_123.jpeg) no-repeat center center fixed;
+  overflow-x: hidden;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -44,7 +45,7 @@ html {
 /*---------------------------------------------*/
 a {
   font-family: Poppins-Regular;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1.7;
   color: #666666;
   margin: 0px;
@@ -74,7 +75,7 @@ h6 {
 
 p {
   font-family: Poppins-Regular;
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.7;
   color: #666666;
   margin: 0px;
@@ -166,15 +167,15 @@ textarea:-ms-input-placeholder {
 }
 
 /*---------------------------------------------*/
-button {
+/* button {
   outline: none !important;
-  border: none;
-  background: transparent;
-}
+  /* border: none; */
+  /* background: transparent; 
+} */
 
-button:hover {
+/* button:hover {
   cursor: pointer;
-}
+} */
 
 iframe {
   border: none !important;
@@ -248,7 +249,7 @@ iframe {
 
 .contact100-form-title-1 {
   font-family: Poppins-Bold;
-  font-size: 25px;
+  font-size: 30px;
   color: #fff;
   line-height: 1.2;
   /* text-align: center; */
@@ -303,8 +304,8 @@ iframe {
 
 .label-input100 {
   font-family: Poppins-Regular;
-  font-size: 15px;
-  color: #070606;
+  font-size: 18px;
+  color: #bdb2b2;
   line-height: 1.5;
   text-align: left; 
 
@@ -320,7 +321,7 @@ iframe {
 .input100 {
   font-family: Poppins-Regular;
   font-size: 15px;
-  color: #555555;
+  color: #918d8d;
   line-height: 1.2;
 
   display: block;

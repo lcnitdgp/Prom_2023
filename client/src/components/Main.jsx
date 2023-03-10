@@ -1,5 +1,5 @@
 import React from "react";
-import "./Main.css";
+import "./Main_11.css";
 import { useNavigate } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 
@@ -25,10 +25,10 @@ export default function Main() {
           data-scrollwhell="0"
           data-draggable="1"
         ></div> */}
+{/* 
+       <div className="wrap-contact100"> 
 
-      {/* <div className="wrap-contact100"> */}
-
-      {/* <div
+       <div
             className="contact100-form-title"
             style={{ backgroundImage: "url(/images/bg-01.jpg)" }}
           > 
@@ -37,17 +37,22 @@ export default function Main() {
             <span className="contact100-form-title-2"> Literary Circle </span>
           </div>
 
-          <Outlet /> */}
-
+          <Outlet /> 
+          </div> */}
+      <div >
+           <img src="images/verve_logo.png" className="verve_logo" />
+           <img src="images/lc_logo.png" className="lc_logo" />
+      </div>
       <div class="patterns" >
         <svg width="100%" height="70%">
-          <text x="50%" y="30%" text-anchor="middle">
+          
+          <text x="50%" y="55%" text-anchor="middle">
             Prom Night
           </text>
         </svg>
         <br/>
-        <button style={{position: "absolute",top: "40%",left: "50%"}} onClick={onSubmitButton}>
-          Button
+        <button className="register_button"style={{position: "absolute",top: "60%"}} onClick={onSubmitButton}>
+         REGISTER TO PROM
           <div class="star-1">
             <svg
               xmlnsXlink="http://www.w3.org/1999/xlink"

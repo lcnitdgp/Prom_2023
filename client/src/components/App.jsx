@@ -13,12 +13,11 @@ import DetailsForm from "./DetailsForm";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Main />}>
-        <Route index element={<BranchForm />} />
+      <Route exact path="/" element={<Main />}/>
+        {/* <Route index element={<BranchForm />} /> */}
         <Route path="/submit" element={<FormSubmitted />} />
         <Route path="/form" element={<DetailsForm />} />
         <Route path="/error" element={<InvalidPage />} />
-      </Route>
     </Routes>
   );
 }

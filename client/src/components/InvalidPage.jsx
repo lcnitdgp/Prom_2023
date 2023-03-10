@@ -9,7 +9,7 @@ export default function InvalidPage() {
           responses after a while.
           <br />
           Please contact Aditya Mitra (<a href="tel:9331055168">9331055168</a>)
-          or Murtaza Khumusi (<a href="tel:8169426180">8169426180</a>) for
+          or Sebontika Bose (<a href="tel:7044070449">7044070449</a>) for
           further queries.
           {/* <p style="margin-top: 20px;"><a href="/" style="font-size: 18px;">Go back.</a></p> */}
         </center>
