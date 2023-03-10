@@ -39,7 +39,7 @@ export default function Main() {
 
           <Outlet /> 
           </div> */}
-      <div >
+      <div className="logo-div" >
            <img src="images/verve_logo.png" className="verve_logo" />
            <img src="images/lc_logo.png" className="lc_logo" />
       </div>

@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css?  family=Lora:400,400i,700,700i");
+@import url('https://fonts.googleapis.com/css2?family=Lobster+Two&family=Roboto:ital,wght@1,300&family=Tilt+Prism&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Lobster+Two&display=swap');
 
 /* .patterns {
     height: 100vh;
@@ -327,33 +329,42 @@
   @media (max-width: 398px){
     .register_button{
       left: 18%;
+      font-family: EB Garamond;
+      font-weight: 600;
     }
     svg text {
-      font-family: Lora;
+      font-family: Lobster Two;
+      letter-spacing: 15 px;
       stroke: #efb660;
-      font-size: 68px;
+      font-size: 78px;
       font-weight: 700;
-      stroke-width: 2;
-      animation: textAnimate 5s infinite alternate;
+      stroke-width: 0.2;
+      animation: textAnimate 8s infinite alternate;
       
     }
+    .logo-div{
+      display: flex;
+      justify-content: space-between;
+    }
     .verve_logo{
-      width: 10%;
+      width: 14%;
       margin-top: 0;
       margin-left: 0;
     }
     .lc_logo{
-      width: 10%;
+      width: 21%;
       margin-top: 0;
-      margin-left: 0;
+      right: 0;
     }
   }
   @media(min-width: 399px ) and (max-width: 500px){
     .register_button{
       left: 28%;
+      font-family: EB Garamond;
     }
     svg text {
-      font-family: Lora;
+      font-family: Lobster Two;
+      letter-spacing: 15 px;
       stroke: #efb660;
       font-size: 78px;
       font-weight: 700;
@@ -361,13 +372,17 @@
       animation: textAnimate 5s infinite alternate;
       
     }
+    .logo-div{
+      display: flex;
+      justify-content: space-between;
+    }
     .verve_logo{
       width: 14%;
       margin-top: 0;
       margin-left: 0;
     }
     .lc_logo{
-      width: 14%;
+      width: 21%;
       margin-top: 0;
       margin-left: 0;
     }
@@ -375,11 +390,12 @@
   @media(min-width: 501px ) and (max-width: 1300px){
     .register_button{
       left: 30%;
+      font-family: EB Garamond;
     }
     
     svg text {
-      font-family: Lora;
-      letter-spacing: 4px;
+      font-family: Lobster Two;
+      letter-spacing: 15 px;
       stroke: #efb660;
       font-size: 90px;
       font-weight: 700;
@@ -387,13 +403,18 @@
       animation: textAnimate 5s infinite alternate;
       
     }
+
+    .logo-div{
+      display: flex;
+      justify-content: space-between;
+    }
     .verve_logo{
       width: 8%;
       margin-top: 0;
       margin-left: 0;
     }
     .lc_logo{
-      width: 8%;
+      width: 12%;
       margin-top: 0;
       margin-left: 0;
     }
@@ -401,24 +422,35 @@
   @media (min-width: 1301px){
     .register_button{
       left: 40%;
+      font-family: EB Garamond;
+      font-weight: 600;
+    }
+    .Title-text{
+     left: 300px;
     }
     svg text {
-      font-family: Lora;
+      font-family: Lobster Two;
+      letter-spacing: 15 px;
       stroke: #efb660;
-      font-size: 150px;
+      font-size: 180px;
       font-weight: 700;
-      stroke-width: 4;
+      stroke-width: 0.2;
       animation: textAnimate 5s infinite alternate;
       
     }
+
+    .logo-div{
+      display: flex;
+      justify-content: space-between;
+    }
     .verve_logo{
       width: 4%;
-      margin-top: 0;
+      top: 10px;
       margin-left: 0;
     }
     .lc_logo{
-      width: 4%;
-      margin-top: 0;
+      width: 6%;
+      top: 10px;
       margin-left: 0;
     }
   }
