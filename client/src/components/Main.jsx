@@ -10,7 +10,9 @@ export default function Main() {
 
   const onSubmitButton = (e) => {
     e.preventDefault();
-    return navigate(`/form`);
+    setTimeout(() => {
+      return navigate("/form");
+    }, 2000);
   };
 
   return (
