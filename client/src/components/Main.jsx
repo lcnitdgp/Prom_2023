@@ -51,8 +51,8 @@ export default function Main() {
           </text>
         </svg>
         <br/>
-        <button className="register_button"style={{position: "absolute",top: "60%"}} onClick={onSubmitButton}>
-         REGISTER TO PROM
+        <button className="register_button"style={{position: "absolute",top: "70%"}} onClick={onSubmitButton}>
+         REGISTER FOR PROM
           <div class="star-1">
             <svg
               xmlnsXlink="http://www.w3.org/1999/xlink"

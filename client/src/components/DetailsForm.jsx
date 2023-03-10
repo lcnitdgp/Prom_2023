@@ -487,15 +487,19 @@ export default function DetailsForm() {
                     <div class="input-wrapper">
                       <div className="wrap-input100">
                         <span className="label-input100">
-                          Payment To : <b style={{ color: "red" }}>*</b> <br/>
+                          Payment To (Rs.1300 per couple) : <b style={{ color: "red" }}>*</b> <br/>
                         <div className="images_payment">
                          <figure>
+                         <figcaption className="upi1">Pushpal</figcaption>
                            <img src="images/pushpal__qr.jpg" style={{outterFit: "contain", width: "100%",padding: "2px"}}/>
+                           
                            <figcaption className="upi1">UPI ID</figcaption>
                             <figcaption className="upi2">pushpalghodaskar-1@okaxis</figcaption>
                           </figure>
                           <figure>
+                          <figcaption className="upi1">Archit</figcaption>
                            <img src="images/archit_qr.jpeg" style={{outterFit: "contain", width: "100%",padding: "2px"}}/>
+                           
                            <figcaption className="upi1">UPI ID</figcaption>
                             <figcaption className="upi2">9144648481@ibl</figcaption>
                           </figure>

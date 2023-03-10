@@ -40,7 +40,7 @@
     border: 3px solid #FEC195;
     border-radius: 8px;
     box-shadow: 0 0 0 #fec1958c;
-    transition: all .3s ease-in-out;
+    transition: all 0.8s ease-in-out;
   }
   
   .star-1 {
@@ -51,7 +51,7 @@
     height: auto;
     filter: drop-shadow(0 0 0 #fffdef);
     z-index: -5;
-    transition: all 1s cubic-bezier(0.05, 0.83, 0.43, 0.96);
+    transition: all 2s cubic-bezier(0.05, 0.83, 0.43, 0.96);
   }
   
   .star-2 {
@@ -62,7 +62,7 @@
     height: auto;
     filter: drop-shadow(0 0 0 #fffdef);
     z-index: -5;
-    transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
+    transition: all 2s cubic-bezier(0, 0.4, 0, 1.01);
   }
   
   .star-3 {
@@ -73,7 +73,7 @@
     height: auto;
     filter: drop-shadow(0 0 0 #fffdef);
     z-index: -5;
-    transition: all 1s cubic-bezier(0, 0.4, 0, 1.01);
+    transition: all 2s cubic-bezier(0, 0.4, 0, 1.01);
   }
   
   .star-4 {
@@ -84,7 +84,7 @@
     height: auto;
     filter: drop-shadow(0 0 0 #fffdef);
     z-index: -5;
-    transition: all .8s cubic-bezier(0, 0.4, 0, 1.01);
+    transition: all 1.8s cubic-bezier(0, 0.4, 0, 1.01);
   }
   
   .star-5 {
@@ -95,7 +95,7 @@
     height: auto;
     filter: drop-shadow(0 0 0 #fffdef);
     z-index: -5;
-    transition: all .6s cubic-bezier(0, 0.4, 0, 1.01);
+    transition: all 1.6s cubic-bezier(0, 0.4, 0, 1.01);
   }
   
   .star-6 {
@@ -106,7 +106,7 @@
     height: auto;
     filter: drop-shadow(0 0 0 #fffdef);
     z-index: -5;
-    transition: all .8s ease;
+    transition: all 1.8s ease;
   }
   
   button:hover {
@@ -188,7 +188,7 @@
     border: 3px solid #FEC195;
     border-radius: 8px;
     box-shadow: 0 0 0 #fec1958c;
-    transition: all .3s ease-in-out;
+    transition: all 0.9s ease-in-out;
   }
   
   .star-1 {
@@ -452,7 +452,7 @@
       stroke: #efb660;
       font-size: 180px;
       font-weight: 700;
-      stroke-width: 0.2;
+      stroke-width: 1.5;
       animation: textAnimate 5s infinite alternate;
       
     }
