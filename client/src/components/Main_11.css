@@ -15,14 +15,14 @@
    0% {
      stroke-dasharray: 0 50%;
      stroke-dashoffset:  20%;
-     fill:hsl(0, 0%, 66%)
+     fill:hsl(0, 1%, 30%)
  
    }
    
    100% {
      stroke-dasharray: 50% 0;
      stroke-dashoffstet: -20%;
-     fill: hsl(0, 0%, 66%)
+     fill: hsl(0, 1%, 14%)
    }
    
  }
@@ -330,7 +330,7 @@
     }
     svg text {
       font-family: Lora;
-      stroke: #bd7811;
+      stroke: #efb660;
       font-size: 68px;
       font-weight: 700;
       stroke-width: 2;
@@ -338,12 +338,12 @@
       
     }
     .verve_logo{
-      width: 18%;
+      width: 10%;
       margin-top: 0;
       margin-left: 0;
     }
     .lc_logo{
-      width: 18%;
+      width: 10%;
       margin-top: 0;
       margin-left: 0;
     }
@@ -354,7 +354,7 @@
     }
     svg text {
       font-family: Lora;
-      stroke: #bd7811;
+      stroke: #efb660;
       font-size: 78px;
       font-weight: 700;
       stroke-width: 3;
@@ -380,7 +380,7 @@
     svg text {
       font-family: Lora;
       letter-spacing: 4px;
-      stroke: #bd7811;
+      stroke: #efb660;
       font-size: 90px;
       font-weight: 700;
       stroke-width: 4;
@@ -404,7 +404,7 @@
     }
     svg text {
       font-family: Lora;
-      stroke: #bd7811;
+      stroke: #efb660;
       font-size: 150px;
       font-weight: 700;
       stroke-width: 4;
@@ -412,12 +412,12 @@
       
     }
     .verve_logo{
-      width: 8%;
+      width: 4%;
       margin-top: 0;
       margin-left: 0;
     }
     .lc_logo{
-      width: 8%;
+      width: 4%;
       margin-top: 0;
       margin-left: 0;
     }
