@@ -51,9 +51,12 @@ export default function Main() {
           <text x="50%" y="45%" text-anchor="middle">
             Prom Night
           </text>
-          <text x="50%" y="75%" text-anchor="middle" className="Date">
-            19th March 2023, 6pm
+          <text x="50%" y="65%" text-anchor="middle" className="Date">
+            18th March 2023, 5:30pm at Residency
           </text>
+          {/* <text x="50%" y="85%" text-anchor="middle" className="Date">
+            <br/>Citi Residency
+          </text> */}
         </svg>
         <br/>
         <button className="register_button"style={{position: "absolute",top: "80%"}} onClick={onSubmitButton}>
