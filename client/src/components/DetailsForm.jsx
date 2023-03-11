@@ -570,7 +570,7 @@ export default function DetailsForm() {
 
                       {errors.paymentProof && touched.paymentProof && (
                         <div className="error-message">
-                          {errors.paymentProof}
+                          Payment proof is required
                         </div>
                       )}
                     </div>
