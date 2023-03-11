@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css?  family=Lora:400,400i,700,700i");
 @import url('https://fonts.googleapis.com/css2?family=Lobster+Two&family=Roboto:ital,wght@1,300&family=Tilt+Prism&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&family=Lobster+Two&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 
 /* .patterns {
     height: 100vh;
@@ -329,10 +330,10 @@
   @media (max-width: 398px){
 
     svg text {
-      font-family: Lobster Two;
+      font-family: Abril Fatface;
       letter-spacing: 15 px;
       stroke: #efb660;
-      font-size: 78px;
+      font-size: 58px;
       font-weight: 700;
       stroke-width: 0.2;
       animation: textAnimate 8s infinite alternate;
@@ -361,12 +362,12 @@
       font-family: EB Garamond;
     }
     svg text {
-      font-family: Lobster Two;
+      font-family: Abril Fatface;
       letter-spacing: 15 px;
       stroke: #efb660;
       font-size: 78px;
-      font-weight: 700;
-      stroke-width: 3;
+      font-weight: 600;
+      stroke-width: 2;
       animation: textAnimate 5s infinite alternate;
       
     }
@@ -398,12 +399,12 @@
     }
     
     svg text {
-      font-family: Lobster Two;
+      font-family: Abril Fatface;
       letter-spacing: 15 px;
       stroke: #efb660;
       font-size: 90px;
-      font-weight: 700;
-      stroke-width: 4;
+      font-weight: 600;
+      stroke-width: 2;
       animation: textAnimate 5s infinite alternate;
       
     }
@@ -453,12 +454,12 @@
      left: 300px;
     }
     svg text {
-      font-family: Lobster Two;
+      font-family: Abril Fatface;
       letter-spacing: 15 px;
       stroke: #efb660;
       font-size: 180px;
-      font-weight: 700;
-      stroke-width: 1.5;
+      font-weight: 600;
+      stroke-width: 2;
       animation: textAnimate 5s infinite alternate;
       
     }
