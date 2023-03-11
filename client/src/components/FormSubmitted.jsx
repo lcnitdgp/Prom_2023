@@ -3,7 +3,7 @@ import "./DetailsForm.css"
 import "./FormSubmitted.css"
 function FormSubmitted() {
   return (
-    <div className="container">
+    <div className="container" >
       <div className="DetailsForm" x="50%" y="50%" style={{height: "30%" }}>
       <div className="jumbotron" style={{ marginTop: "50px",color: "Dark Brown" }}>
         <center>

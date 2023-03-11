@@ -16,7 +16,12 @@
     height: 100%;
 } */
 .container{
-    margin-top: 50%;
+    margin-top: 15%;
+}
+@media(max-width: 550px){
+    .container{
+        margin-top: 55%;
+    } 
 }
 .DetailsForm{
     padding-top: 1px;
