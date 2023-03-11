@@ -55,7 +55,7 @@ export default function Main() {
             18th March 2023
           </text>
           <text x="50%" y="75%" text-anchor="middle" className="Date">
-            5:30 PM
+            5:00 PM
           </text>
           {/* <text x="50%" y="85%" text-anchor="middle" className="Date">
             <br/>Citi Residency
