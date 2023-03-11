@@ -1,0 +1,26 @@
+/* center{
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%,-50%);
+} */
+/* .DetailsForm{
+    position: absolute;
+    top: 150%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%,-50%);
+} */
+/* *{
+    height: 100%;
+} */
+.container{
+    margin-top: 50%;
+}
+.DetailsForm{
+    padding-top: 1px;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 1px;
+}

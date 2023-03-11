@@ -51,8 +51,11 @@ export default function Main() {
           <text x="50%" y="45%" text-anchor="middle">
             Prom Night
           </text>
+          <text x="50%" y="65%" text-anchor="middle" className="Date">
+            18th March 2023
+          </text>
           <text x="50%" y="75%" text-anchor="middle" className="Date">
-            19th March 2023, 6pm
+            5:30 PM
           </text>
         </svg>
         <br/>
