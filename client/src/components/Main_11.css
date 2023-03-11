@@ -330,7 +330,7 @@
   @media (max-width: 398px){
 
     svg text {
-      font-family: Abril Fatface;
+      font-family: Lora;
       letter-spacing: 15 px;
       stroke: #efb660;
       font-size: 58px;
@@ -362,12 +362,12 @@
       font-family: EB Garamond;
     }
     svg text {
-      font-family: Abril Fatface;
+      font-family: Lora;
       letter-spacing: 15 px;
       stroke: #efb660;
       font-size: 78px;
       font-weight: 600;
-      stroke-width: 2;
+      stroke-width: 3;
       animation: textAnimate 5s infinite alternate;
       
     }
@@ -399,12 +399,12 @@
     }
     
     svg text {
-      font-family: Abril Fatface;
+      font-family: Lora;
       letter-spacing: 15 px;
       stroke: #efb660;
       font-size: 90px;
       font-weight: 600;
-      stroke-width: 2;
+      stroke-width: 3;
       animation: textAnimate 5s infinite alternate;
       
     }
@@ -466,12 +466,12 @@
      left: 300px;
     }
     svg text {
-      font-family: Abril Fatface;
+      font-family: Lora;
       letter-spacing: 15 px;
       stroke: #efb660;
       font-size: 180px;
       font-weight: 600;
-      stroke-width: 2;
+      stroke-width: 4;
       animation: textAnimate 5s infinite alternate;
       
     }
