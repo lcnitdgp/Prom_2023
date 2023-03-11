@@ -52,7 +52,10 @@ export default function Main() {
             Prom Night
           </text>
           <text x="50%" y="65%" text-anchor="middle" className="Date">
-            18th March 2023, 5:30pm at Residency
+            18th March 2023
+          </text>
+          <text x="50%" y="75%" text-anchor="middle" className="Date">
+            5:30 PM
           </text>
           {/* <text x="50%" y="85%" text-anchor="middle" className="Date">
             <br/>Citi Residency
