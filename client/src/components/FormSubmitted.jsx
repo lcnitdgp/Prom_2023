@@ -1,7 +1,9 @@
 import React from 'react';
+import "./DetailsForm.css"
 function FormSubmitted() {
   return (
     <div className="container">
+      <div className="DetailsForm">
       <div className="jumbotron" style={{ marginTop: "50px",color: "Brown" }}>
         <center>
          <h4>Thanks for your submission.
@@ -15,6 +17,7 @@ function FormSubmitted() {
             </a>
           </p>
         </center>
+      </div>
       </div>
     </div>
   );

@@ -425,6 +425,12 @@
       margin-top: 0;
       margin-left: 0;
     }
+    .Date{
+      font-weight: 400;
+      stroke-width: 1.8;
+      animation: textAnimate 5s infinite alternate;
+      font-size: 40px;
+    }
   }
   @media (max-width: 501px){
     .register_button{
@@ -439,6 +445,12 @@
       width: 23%;
       margin-top: 0;
       margin-left: 0;
+    }
+    .Date{
+      font-weight: 400;
+      stroke-width: 1.3;
+      animation: textAnimate 5s infinite alternate;
+      font-size: 30px;
     }
   }
   @media (min-width: 1301px){
@@ -462,6 +474,12 @@
       stroke-width: 2;
       animation: textAnimate 5s infinite alternate;
       
+    }
+    .Date{
+      font-weight: 400;
+      stroke-width: 1.6;
+      animation: textAnimate 5s infinite alternate;
+      font-size: 55px;
     }
 
     .logo-div{

@@ -48,12 +48,15 @@ export default function Main() {
       <div class="patterns" >
         <svg width="100%" height="70%">
           
-          <text x="50%" y="55%" text-anchor="middle">
+          <text x="50%" y="45%" text-anchor="middle">
             Prom Night
+          </text>
+          <text x="50%" y="75%" text-anchor="middle" className="Date">
+            19th March 2023, 6pm
           </text>
         </svg>
         <br/>
-        <button className="register_button"style={{position: "absolute",top: "70%"}} onClick={onSubmitButton}>
+        <button className="register_button"style={{position: "absolute",top: "80%"}} onClick={onSubmitButton}>
          REGISTER FOR PROM
           <div class="star-1">
             <svg
