@@ -34,7 +34,7 @@ body,
 html {
   /* height: 100%; */
   font-family: Poppins-Regular, sans-serif;
-  background: url(/images/webbg_123.jpeg) no-repeat center center fixed;
+  background: url(/images/Prom-transformedd1.png) no-repeat center center fixed;
   overflow-x: hidden;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -141,29 +141,29 @@ textarea:focus:-ms-input-placeholder {
 }
 
 input::-webkit-input-placeholder {
-  color: #999999;
+  color: #1a1919;
 }
 input:-moz-placeholder {
-  color: #999999;
+  color: #1a1919;
 }
 input::-moz-placeholder {
-  color: #999999;
+  color: #1a1919;
 }
 input:-ms-input-placeholder {
-  color: #999999;
+  color: #1a1919;
 }
 
 textarea::-webkit-input-placeholder {
-  color: #999999;
+  color: #1a1919;
 }
 textarea:-moz-placeholder {
-  color: #999999;
+  color: #1a1919;
 }
 textarea::-moz-placeholder {
-  color: #999999;
+  color: #1a1919;
 }
 textarea:-ms-input-placeholder {
-  color: #999999;
+  color: #1a1919;
 }
 
 /*---------------------------------------------*/
@@ -219,7 +219,7 @@ iframe {
   /* border: 2px solid rgba(255, 255, 255, 0.795); */
   border: 2px;
   border-radius: 20px;
-  backdrop-filter: blur(5px);
+  /* backdrop-filter: blur(0px); */
   /* border-radius: 10px; */
   overflow: hidden;
 
@@ -250,7 +250,7 @@ iframe {
 .contact100-form-title-1 {
   font-family: Poppins-Bold;
   font-size: 30px;
-  color: #fff;
+  color: #222222;
   line-height: 1.2;
   /* text-align: center; */
   padding-bottom: 7px;
@@ -259,7 +259,7 @@ iframe {
 .contact100-form-title-2 {
   font-family: Poppins-Regular;
   font-size: 18px;
-  color: #fff;
+  color: #171717;
   line-height: 1.5;
   text-align: center;
 }
@@ -280,6 +280,7 @@ iframe {
 [ Form ]*/
 
 .contact100-form {
+  /* background-color: #052450; */
   width: 100%;
   display: -webkit-box;
   display: -webkit-flex;
@@ -297,15 +298,16 @@ iframe {
 .wrap-input100 {
   width: 100%;
   position: relative;
-  border-bottom: 1px solid #b2b2b2;
+  border-bottom: 1px solid #080808;
   /* margin-bottom: 35px; */
   /* text-align: left; */
 }
 
 .label-input100 {
   font-family: Poppins-Regular;
+  font-weight: 600;
   font-size: 18px;
-  color: #bdb2b2;
+  color: #1a1919;
   line-height: 1.5;
   text-align: left; 
 
@@ -321,7 +323,8 @@ iframe {
 .input100 {
   font-family: Poppins-Regular;
   font-size: 15px;
-  color: #918d8d;
+  font-weight: 400;
+  color: #151515;
   line-height: 1.2;
 
   display: block;

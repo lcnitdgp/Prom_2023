@@ -10,7 +10,9 @@ export default function Main() {
 
   const onSubmitButton = (e) => {
     e.preventDefault();
-    return navigate(`/form`);
+    setTimeout(() => {
+      return navigate("/form");
+    }, 2000);
   };
 
   return (
@@ -39,20 +41,23 @@ export default function Main() {
 
           <Outlet /> 
           </div> */}
-      <div >
+      <div className="logo-div" >
            <img src="images/verve_logo.png" className="verve_logo" />
            <img src="images/lc_logo.png" className="lc_logo" />
       </div>
       <div class="patterns" >
         <svg width="100%" height="70%">
           
-          <text x="50%" y="55%" text-anchor="middle">
+          <text x="50%" y="45%" text-anchor="middle">
             Prom Night
+          </text>
+          <text x="50%" y="75%" text-anchor="middle" className="Date">
+            19th March 2023, 6pm
           </text>
         </svg>
         <br/>
-        <button className="register_button"style={{position: "absolute",top: "60%"}} onClick={onSubmitButton}>
-         REGISTER TO PROM
+        <button className="register_button"style={{position: "absolute",top: "80%"}} onClick={onSubmitButton}>
+         REGISTER FOR PROM
           <div class="star-1">
             <svg
               xmlnsXlink="http://www.w3.org/1999/xlink"
