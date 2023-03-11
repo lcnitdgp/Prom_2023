@@ -312,7 +312,7 @@ export default function DetailsForm() {
                     <div className="wrap-input100">
                       <span className="label-input100">
                         <span style={{color:"black"}}>
-                          Full Name: <b style={{ color: "red" }}>*</b>
+                          Name: <b style={{ color: "red" }}>*</b>
                         </span>
                       </span>
                       <input className="input100" type="text" {...field} />
@@ -401,7 +401,7 @@ export default function DetailsForm() {
                     <div className="wrap-input100">
                       <span className="label-input100">
                         <span>
-                          Full Name: <b style={{ color: "red" }}>*</b>
+                          Name: <b style={{ color: "red" }}>*</b>
                         </span>
                       </span>
                       <input className="input100" type="text" {...field} />
