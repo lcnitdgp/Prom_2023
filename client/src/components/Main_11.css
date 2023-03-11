@@ -335,7 +335,7 @@
       stroke: #efb660;
       font-size: 58px;
       font-weight: 700;
-      stroke-width: 0.2;
+      stroke-width: 2;
       animation: textAnimate 8s infinite alternate;
       
     }
