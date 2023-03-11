@@ -9,9 +9,9 @@ function FormSubmitted() {
         <center>
          <h4>Thanks for your submission.
           <br />
-          For any help or queries, contact Epshita Chakraborty (
-          <a href="tel: 9054094102" style={{color: "Dark Brown" }}>9331055168</a>) or Pushpal Ghodaskar (
-          <a href="tel:" style={{color: "Dark Brown" }}>7044070449</a>).</h4> 
+          For any help or queries, contact Epshita Chakravarty (
+          <a href="tel: 9054093102" style={{color: "Dark Brown" }}>9054093102</a>) or Pushpal Ghodaskar (
+          <a href="tel: 8055628645" style={{color: "Dark Brown" }}>8055628645</a>).</h4> 
           <p style={{ margin: "30px 0" }}>
             <a href="/" style={{ fontSize: "25px", color: "Dark Brown" }}>
               Add another submission.
