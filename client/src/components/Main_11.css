@@ -333,12 +333,15 @@
     fill: #FFFDEF
   }
   @media (max-width: 398px){
+    .patterns{
+      padding: 10px;
+    }
 
     svg text {
       font-family: Lora;
       letter-spacing: 15 px;
       stroke: #efb660;
-      font-size: 58px;
+      font-size: 50px;
       font-weight: 700;
       stroke-width: 2;
       animation: textAnimate 8s infinite alternate;
@@ -362,6 +365,9 @@
     }
   }
   @media(min-width: 399px ) and (max-width: 500px){
+    .patterns{
+      padding: 10px;
+    }
     .register_button{
       left: 28%;
       font-family: EB Garamond;
@@ -370,7 +376,7 @@
       font-family: Lora;
       letter-spacing: 15 px;
       stroke: #efb660;
-      font-size: 78px;
+      font-size: 68px;
       font-weight: 600;
       stroke-width: 3;
       animation: textAnimate 5s infinite alternate;
@@ -438,6 +444,9 @@
     }
   }
   @media (max-width: 501px){
+    .patterns{
+      padding: 10px;
+    }
     .register_button{
       position: absolute;
       left: 50%;
